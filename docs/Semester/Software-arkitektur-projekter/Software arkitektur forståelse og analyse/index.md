@@ -1,2 +1,0 @@
-# Oversigt
-Dette er sektionen.

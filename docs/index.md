@@ -1,11 +1,5 @@
-# Semester Portfolio
+This is your new *vault*.
 
-Velkommen til min læringsportfolio for AI, ML og Software Arkitektur.
+Make a note of something, [[create a link]], or try [the Importer](https://help.obsidian.md/Plugins/Importer)!
 
-Her kan du finde:
-- Blogindlæg
-- Noter
-- Projekter
-- Læringsmål
-- Arkitektur-analyser
-- AI & ML eksperimenter
+When you're ready, delete this note and make the vault your own.
