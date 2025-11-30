@@ -3,7 +3,6 @@ site_description: Min læringsportfolio for AI, ML og Software Arkitektur
 site_url: https://uyscutty.github.io/semester_portfolio/
 use_directory_urls: true
 
-
 theme:
   name: material
   features:
@@ -15,11 +14,11 @@ nav:
   - Forside: index.md
 
   - Blog:
-      - AI & ML blog: blog/ai-ml-blog/index.md
-      - Software Arkitektur blog: blog/software-arkitektur-blog/index.md
+      - AI & ML blog: Blog/AI-ML-blog/index.md
+      - Software Arkitektur blog: Blog/Software-arkitektur-blog/index.md
 
   - Semester:
-      - Velkomst: semester/index.md
-      - AI & ML: semester/ai-ml/index.md
-      - Software Arkitektur & Design Patterns: semester/software-arkitektur-projekter/index.md
-      - Shared: semester/shared/index.md
+      - Velkomst: Semester/index.md
+      - AI & ML: Semester/AI-ML/index.md
+      - Software Arkitektur & Design Patterns: Semester/Software-arkitektur-projekter/index.md
+      - Shared: Semester/Shared/index.md
