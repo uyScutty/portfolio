@@ -9,17 +9,6 @@ permissions:
   contents: read
   pages: write
   id-token: write
-name: Deploy MkDocs site to GitHub Pages
-
-on:
-  push:
-    branches:
-      - main
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
 
 jobs:
   build-deploy:
@@ -56,4 +45,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
