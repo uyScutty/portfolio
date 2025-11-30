@@ -1,1 +1,16 @@
-site_name: My Docs
+site_name: Semester Portfolio
+site_description: Min læringsportfolio for AI, ML og Software Arkitektur
+
+theme:
+  name: material
+
+nav:
+  - Forside: index.md
+  - Blog:
+      - AI & ML blog: Blog/AI & ML blog/
+      - Software Arkitektur blog: Blog/Software arkitektur og Design pattern blogs blog/
+  - Semester:
+      - Velkomst: Semester/Welcome.md
+      - AI & ML: Semester/AI & ML/
+      - Software Arkitektur & Design Patterns: Semester/Software arkitektur og design pattern projekters/
+      - Shared: Semester/Shared/
