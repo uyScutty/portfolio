@@ -3,6 +3,10 @@ site_description: Min læringsportfolio for AI, ML og Software Arkitektur
 
 theme:
   name: material
+  features:
+    - navigation.expand
+    - navigation.sections
+    - navigation.top
 
 nav:
   - Forside: index.md
