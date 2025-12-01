@@ -1,5 +1,6 @@
 site_name: Semester Portfolio
 site_description: Min læringsportfolio for AI, ML og Software Arkitektur
+site_dir: docs
 use_directory_urls: true
 
 theme:
@@ -15,11 +16,9 @@ theme:
       accent: indigo
 
 nav: []
- 
+
 plugins:
   - roamlinks:
       wikilinks: true
       image_dir: images
-
-
 
