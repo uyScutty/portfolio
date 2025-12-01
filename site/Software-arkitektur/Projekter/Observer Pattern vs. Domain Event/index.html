@@ -1,0 +1,2944 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Min læringsportfolio for AI, ML og Software Arkitektur">
+      
+      
+      
+      
+        <link rel="prev" href="../Strategy%20pattern/">
+      
+      
+        <link rel="next" href="../Prototype%20implementering%20til%20projekt/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Observer vs Domain Events - Semester Portfolio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#observer-pattern" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Semester Portfolio" class="md-header__button md-logo" aria-label="Semester Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Semester Portfolio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Observer vs Domain Events
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Semester Portfolio" class="md-nav__button md-logo" aria-label="Semester Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Semester Portfolio
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forside
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📝 Blog
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📝 Blog
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🤖 AI & ML
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🤖 AI & ML
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/AI-ML-blog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oversigt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_2" id="__nav_2_1_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alle opslag
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Alle opslag
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/AI-ML-blog/1.%20AI%20%26%20ML%20-%20L%C3%A6ringsm%C3%A5l%20og%20opstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Læringsmål og opstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/AI-ML-blog/2.%20AI%20%26%20ML%20-%20Basis%20viden%20NLP%2C%20ML%20%26%20AI./" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Basis viden NLP, ML & AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/AI-ML-blog/3.%20AI%20%26%20ML%20-%20LLM%20modeller%20og%20transformers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. LLM modeller & transformers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/AI-ML-blog/4.%20AI%20%26%20ML%20-%20LLM%2C%20tokenisering%20og%20algoritmer/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Tokenisering & algoritmer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/AI-ML-blog/5.%20AI%20%26%20ML%20-%20Transformer%20og%20specifikke%20modeller/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Transformer & modeller
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/AI-ML-blog/6. AI & ML - RAG VS. Finetuning.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. RAG vs Finetuning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/AI-ML-blog/7. AI & ML - Fine-tuning, RAG og videre arbejde i Python-projekter..md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Fine-tuning og Python arbejde
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/AI-ML-blog/8.%20AI%20%26%20ML%20-%20Chatbots%20test%20projekter./" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Chatbots test projekter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/AI-ML-blog/9.%20AI%20%26%20ML%20-%20Chatbot%20udvikling./" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. Chatbot udvikling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/AI-ML-blog/10. AI & ML - Projektrelateret agent implementering.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Agent implementering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏗️ Software Arkitektur
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏗️ Software Arkitektur
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/Software-arkitektur-blog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oversigt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Alle opslag
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Alle opslag
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/Software-arkitektur-blog/1.%20Software%20arkitektur%20%26%20Design%20patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Software arkitektur & Design patterns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/Software-arkitektur-blog/2.%20Software%20arkitektur%20%26%20Design%20patterns./" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Software arkitektur & Design patterns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/Software-arkitektur-blog/3.%20Software%20arkitektur%20%26%20Design%20Patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Software arkitektur & Design Patterns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/Software-arkitektur-blog/4.%20Software%20arkitektur%20%26%20Design%20patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Software arkitektur & Design patterns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/Software-arkitektur-blog/5.%20Software%20arkitektur%20%26%20Design%20patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Software arkitektur & Design patterns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/Software-arkitektur-blog/6.%20Software%20arkitektur%20%26%20Design%20patterns/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Software arkitektur & Design patterns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/Software-arkitektur-blog/7.%20Software%20arkitektur%20%26%20Design%20patterns./" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. Software arkitektur & Design patterns
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/Software-arkitektur-blog/8.%20%20Vertical%20Slice%20og%20en%20anden%20struktur%20p%C3%A5%20features./" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    8. Vertical Slice og en anden struktur på features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/Software-arkitektur-blog/9.  DDD - Forståelse af domænet..md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    9. DDD - Forståelse af domænet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Blog/Software-arkitektur-blog/10.%20Afslutning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10. Afslutning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🤖 AI & ML
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🤖 AI & ML
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../AI-ML/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oversigt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../AI-ML/L%C3%A6ringsm%C3%A5l%20Ai%20%26%20ML/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Læringsmål
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../AI-ML/Sikkerhed%20i%20forhold%20til%20projektet%20cahtbotten/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sikkerhed
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧠 Forståelse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🧠 Forståelse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../AI-ML/AI-ML-forst%C3%A5else/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oversigt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../AI-ML/AI-ML-forst%C3%A5else/LLM%20Modeller/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM Modeller
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../AI-ML/AI-ML-forst%C3%A5else/LLM%20og%20transformers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    LLM & Transformers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../AI-ML/AI-ML-forst%C3%A5else/RAG%20VS.%20Finetuning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RAG VS Finetuning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../AI-ML/AI-ML-forst%C3%A5else/Tokenisering%20og%20tr%C3%A6ning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tokenisering & Træning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧪 Projekter
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🧪 Projekter
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../AI-ML/projekter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oversigt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../AI-ML/projekter/Chatbot%20i%20Python%20test%201.%20%28%20Setup%20%26%20in%20memory%20vector%20s%C3%B8gning%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chatbot test 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../AI-ML/projekter/Chatbot%20i%20python%20test%202.%20%28Persitens%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chatbot test 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../AI-ML/projekter/Chatbot%20test%203.%20%28RAG%20i%20terminal%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chatbot test 3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../AI-ML/projekter/Chatbot%20test%204%20%28Rest%20API%28Fast%20API%29%20Gateway./" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chatbot test 4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../AI-ML/projekter/Chatbot test 5 Fra chatbot på vej mod ag....md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Chatbot test 5
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../AI-ML/projekter/Prototype til projekt/Chatbot 6 - Implementation af Agent prototype i swagger.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Agent prototype
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🏗️ Software Arkitektur
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🏗️ Software Arkitektur
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oversigt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../L%C3%A6ringsm%C3%A5l%20Software%20arkitektur/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Læringsmål
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🔍 Analyse
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🔍 Analyse
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Software%20arkitektur%20forst%C3%A5else%20og%20analyse/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oversigt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Software%20arkitektur%20forst%C3%A5else%20og%20analyse/1.%20Arkitektur%20gennemgang%20og%20korte%20analyser./" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arkitektur gennemgang
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Software%20arkitektur%20forst%C3%A5else%20og%20analyse/2.%20Clean%20architecture%20og%20modul%C3%A6r%20monolith./" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clean architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Software%20arkitektur%20forst%C3%A5else%20og%20analyse/3.Vertical%20slice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vertical Slice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Software%20arkitektur%20forst%C3%A5else%20og%20analyse/4.%20Dom%C3%A6ne%20driven%20design%20-%20DDD%20patterns./" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DDD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Software%20arkitektur%20forst%C3%A5else%20og%20analyse/CQRS%20i%20vores%20projekt%20med%20vertical%20slice/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CQRS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Software%20arkitektur%20forst%C3%A5else%20og%20analyse/Repository%20pattern%20i%20vores%20projekt./" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repository Pattern
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    🧪 Projekter
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    🧪 Projekter
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oversigt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Factory%20pattern/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Factory Pattern
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Strategy%20pattern/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Strategy Pattern
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observer vs Domain Events
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Observer vs Domain Events
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Idé:
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#karakteristika" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Karakteristika:
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Prototype%20implementering%20til%20projekt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Prototype
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Generelt
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    📚 Generelt
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Generelt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oversigt
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Generelt/Deployment%20og%20services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deployment & Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Generelt/Samfundsm%C3%A6ssige%20aspekter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Samfundsmæssige aspekter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Generelt/refleksioner%20til%20tidligere%20l%C3%A6ring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Refleksioner
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ide" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Idé:
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#karakteristika" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Karakteristika:
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p>For at genopfriske læringen omkring observer pattern fra tidligere semestre og se hvordan vi kan bruge det i vores projekt, så har jeg valgt at lave et lille projekt og se hvordan det kan bruges i en situation der passer til vores projekt i forhold til at observere ved oprettelse af ny content via post hvor der så bliver lyttet samt reageret på eventet, hvilket resulterer i udsendelsen af en email.</p>
+<h1 id="observer-pattern">**Observer Pattern</h1>
+<h3 id="ide">Idé:</h3>
+<p>Et objekt (subject) holder styr på flere observers.<br />
+Når subject ændrer sig, notificerer den alle observers direkte.</p>
+<h3 id="karakteristika">Karakteristika:</h3>
+<ul>
+<li>direkte reference mellem subject og observer</li>
+<li>tæt kobling</li>
+<li>objekter kender ofte hinanden</li>
+<li>typisk synkront</li>
+<li>er bedst i UI og simple apps</li>
+<li>fungerer som “hvem lytter på mig?”-model</li>
+</ul>
+<h1 id="domain-events-ddd"><strong>Domain Events (DDD)</strong></h1>
+<h3 id="ide_1">Idé:</h3>
+<p>Domænet udsender en hændelse — men ved <em>ikke</em> hvem der reagerer på den.</p>
+<h3 id="karakteristika_1">Karakteristika:</h3>
+<ul>
+<li><strong>ingen references</strong> mellem domain og event handlers</li>
+<li><strong>lav coupling</strong></li>
+<li><strong>rent domæne</strong></li>
+<li>hændelser beskriver forretningssituationer (ikke UI-tilstande)</li>
+<li>Application-laget håndterer eventet</li>
+<li>Infrastructure kan håndtere sideeffekter</li>
+</ul>
+<h3 id="observer-pattern_1">Observer Pattern</h3>
+<p>Her ses opbygningen af mit observer spikeprojekt.
+![[Pasted image 20251121115652.png]]</p>
+<h3 id="1-subject-contentpublisher"><strong>1) Subject → ContentPublisher</strong></h3>
+<p>Den der udsender beskeder / hændelser.<br />
+ContentPublisher implementerer <strong>ISubject</strong>, som er kontrakten for et subject.<br />
+Her kan observers blive <strong>tilmeldt (Attach)</strong> eller <strong>frameldt (Detach)</strong>.<br />
+Når noget sker, kalder subject <strong>Notify</strong>, som sender en besked til alle observers.</p>
+<p>![[Pasted image 20251121121805.png]]</p>
+<h3 id="2-observers-emailsubscriber-pushsubscriber"><strong>2) Observers → EmailSubscriber / PushSubscriber</strong></h3>
+<p>Modtagere af beskeder.<br />
+De implementerer <strong>IObserver</strong>, som er kontrakten for hvordan observers reagerer.<br />
+Når de modtager <code>Update(message)</code>, håndterer de hændelsen på hver deres måde.</p>
+<p>![[Pasted image 20251121123919.png]]</p>
+<h3 id="3-interfaces-isubject-og-iobserver"><strong>3) Interfaces → ISubject og IObserver</strong></h3>
+<p>Kontrakten for hvordan subject og observers skal opføre sig.<br />
+ISubject styrer notifikationerne.<br />
+IObserver styrer hvordan subscribers reagerer.
+![[Pasted image 20251121122737.png]]</p>
+<p>ISubject er kontrakten for publishers (ContentPublisher) og udsendelsen af beskeder og hændelser
+![[Pasted image 20251121123007.png]]</p>
+<h3 id="flowet-i-min-kode"><strong>Flowet i min kode</strong></h3>
+<ol>
+<li>Observers tilmelder sig via <code>Attach()</code></li>
+<li>ContentPublisher publicerer nyt content og kalder <code>Notify()</code></li>
+<li>Notify kalder <code>Update(message)</code> på alle observers</li>
+<li>Email og Push reagerer hver for sig</li>
+</ol>
+<p><strong>Pointen med Observer Pattern:</strong><br />
+Det giver løs kobling: Subject kender ikke implementeringen af observers, kun interfacet.<br />
+Det gør systemet fleksibelt og udvideligt.</p>
+<h3 id="domain-event">Domain event</h3>
+<p>Her har jeg afprøvet et domain event implementering for at sammenligne med Observer pattern.
+Jeg har i dette Spike Project ikke brugt MediatR til at styre handlers for at få et bedre indblik i hvordan DDD-event fungerer reelt.</p>
+<p>Her er projektets opbygning.
+![[Pasted image 20251121134220.png]]</p>
+<h3 id="application-laget"><strong>Application-laget</strong></h3>
+<p>Her ligger klasser, der <strong>håndterer hændelser</strong> og styrer, hvad der skal ske i systemet.</p>
+<ul>
+<li>
+<p><strong>DomainEventBus.cs</strong><br />
+    Event-bussen der sender domain events videre til de rigtige handlers.</p>
+</li>
+<li>
+<p><strong>IDomainEventHandler.cs</strong><br />
+    Interface for alle handlers. Bestemmer hvordan en handler skal reagere på et event.</p>
+</li>
+<li>
+<p><strong>PostPublishedHandler.cs</strong><br />
+    Selve handleren for PostPublishedEvent. Kører application-logik som email og kald til domænet.</p>
+</li>
+</ul>
+<p><em>Application-laget reagerer på events og binder domæne og infrastruktur sammen.</em></p>
+<hr />
+<h3 id="domain-laget"><strong>Domain-laget</strong></h3>
+<p>Her ligger alt, der hører til <strong>selve domænelogikken</strong> — altså kernefunktionalitet.</p>
+<ul>
+<li>
+<p><strong>ContentService.cs</strong><br />
+    Domæneservice med forretningslogik. Den genererer nye Domain Events.</p>
+</li>
+<li>
+<p><strong>IDomainEvent.cs</strong><br />
+    Kontrakten for alle domain events.</p>
+</li>
+<li>
+<p><strong>PostPublishedEvent.cs</strong><br />
+    Et konkret domain event. Repræsenterer “post er publiceret”.</p>
+</li>
+</ul>
+<p><em>Domain-laget er systemets kerne og indeholder regler, entiteter og events.</em></p>
+<hr />
+<h3 id="infrastructure-laget"><strong>Infrastructure-laget</strong></h3>
+<p>Her ligger kode, der taler med eksterne systemer eller ressourcer.</p>
+<ul>
+<li><strong>EmailNotifier.cs</strong><br />
+    En simpel infrastrukturservice for at sende e-mails.</li>
+</ul>
+<p><em>Infrastructure er afhængigt af eksterne ressourcer og bruges af application layer.</em></p>
+<p>EventBus
+EventBus er programmets central, der styrer indkomne events.
+Den ved hvordan de kaldes og den ved hvilke handlers der håndterer hvilke events og kan derfor distriuere dem til den korrekte handler. I dette projekt har vi DomainEventBus som vores eventBus.</p>
+<p>![[Pasted image 20251121134623.png]]
+Priavte readonly List..- Her laves listen over alle typer eventhandlers.
+i RegisterHandler metoden - Her registreres en handler og bliver gemt til et domain event. Det er her den korrekte handler registreres. Den der lytter efter eventet.
+PublishAsync metoden - Her sendes eventet ud i systemet og metoden udføres på eventet.</p>
+<p>![[Pasted image 20251121135800.png]]</p>
+<p>I PostPublishedEvent - Der implmenteres kontrakten fra IDomainEventHandler.
+Den lytter altså efter PostPublishedEvent og bliver deror kaldt af DomainEventBus.</p>
+<p>De 3 services fra EmailNotifier, ContentService og DomainEventBus bliver injiceret i constructoren, så de kan bruges.
+EmailNotifier - Sender email ved event.
+ContentService - kan lave nye events
+DomainEventBus - Kan publisere event fra domænet.</p>
+<p>I handleAsync metode - Kaldes automatisk når Der er et PostPublishedEvent i DomainEventBus.
+Den udfører logikken for EmailNotifier og ContentService.</p>
+<p>Til sidst bliver der via foreach - Foreach tager hvert event, som domænet selv har skabt, og sender det tilbage ind i event-systemet, så de også bliver håndteret.
+Her bruges liste som standard for at kunne håndtere flere events. Hvis flere events udløses som fx. notifikationer eller logging.
+![[Pasted image 20251121140922.png]]</p>
+<p>ContentService
+![[Pasted image 20251121144458.png]]
+Her kan der skabes events i _pendingEvents
+Og via publishPost() - publiseres post og genereres et nyt domæne event.</p>
+<p>ContentSerivce ligger i domænelaget, da den publiserer post og domæne events.</p>
+<p>Dette kan derefter bruges af PostPublishHandler - Der kan hente listen og sende events videre i EventBus.
+ContentService udfører forretningslogik og genererer nye Domain Events, som gemmes i en liste, så de senere kan sendes videre til EventBus og blive håndteret.</p>
+<p>![[Pasted image 20251121145221.png]]
+PostPublishedEvent - Indeholder de data handlers bruger, her i form af author og title og den repræsenterer hændelsen at " Et indlæg blev publiceret"
+Den repræsenterer hvad der sker i domænet og hører derfor til i domænelaget.</p>
+<p>EmailNotifier - simulerer sending af email og ligger i infrastructure da den hører til ydre services der kobles på systemet.</p>
+<h1 id="domain-events-i-the-way-of-coherence">**Domain Events i  The Way of Coherence</h1>
+<p>I <em>The Way of Coherence</em> anvender vi Domain Events for at sikre en klar og fleksibel adskillelse mellem domænelogikken og de procesflows, der skal køre efter en forretningshændelse. Domænehændelserne bruges til at markere, at noget betydningsfuldt er sket i systemets kerne, uden at domænelaget behøver at kende de konkrete reaktioner eller eksterne konsekvenser.</p>
+<p>Det passer direkte ind i både Clean Architecture og jeres Vertical Slice-struktur. Domænet rejser hændelsen, og den enkelte slice i Application-laget håndterer den del af logikken, der vedrører netop det forløb.</p>
+<hr />
+<h2 id="1-hvad-er-et-domain-event-i-projektet"><strong>1. Hvad er et Domain Event i projektet?</strong></h2>
+<p>Et Domain Event er en lille model, der beskriver en vigtig forretningshændelse. Når et indlæg bliver udgivet, er dette en central handling i systemets Content-domæne. I stedet for at lade domæneobjekterne selv stå for logging, notifikationer eller statistik, rejser de blot et Domain Event.</p>
+<p>På den måde kan andre dele af systemet reagere, uden at domænet skal ændres eller opnå nye afhængigheder.</p>
+<hr />
+<h2 id="2-hvorfor-bruger-vi-domain-events"><strong>2. Hvorfor bruger vi Domain Events?</strong></h2>
+<p>Domain Events anvendes for at opnå:</p>
+<ul>
+<li>Lav kobling mellem lagene.</li>
+<li>Et domænelag uden tekniske afhængigheder til logging, e-mails, UI eller applikationsservices.</li>
+<li>En fleksibel arkitektur, hvor nye reaktioner kan tilføjes uden ændringer i domænemodellerne.</li>
+<li>En vertikal slice-opdeling, hvor hver slice kan reagere på hændelser, uden at det påvirker andre features.</li>
+<li>Lettest mulig testbarhed, da domænelogik kan testes isoleret.</li>
+</ul>
+<p>Vi valgte Domain Events i stedet for Observer Pattern, fordi Domain Events giver løs kobling, rent domæne, høj testbarhed og perfekt integration med Clean Architecture, DDD og Vertical Slice Architecture.  </p>
+<blockquote>
+<p>Observer Pattern ville have skabt coupling i domænet og brudt arkitekturens afhængighedsregler.</p>
+</blockquote>
+<hr />
+<h2 id="3-hvor-rejser-vi-hndelsen"><strong>3. Hvor rejser vi hændelsen?</strong></h2>
+<p>Når et indlæg udgives via domænemetoden <em>Publish()</em>, registrerer objektet selv en Domain Event. Domænelaget reagerer altså ikke på hændelsen – det fortæller blot, at den er sket.</p>
+<p>Dette følger principperne i Domain-Driven Design:<br />
+Domænet kender reglerne og ved, hvornår noget er betydningsfuldt, men det kender ikke resten af systemet.</p>
+<hr />
+<h2 id="4-hvordan-kommer-hndelsen-videre-i-systemet"><strong>4. Hvordan kommer hændelsen videre i systemet?</strong></h2>
+<p>Når indlægget gemmes via repositoryet, opsamler infrastrukturen alle Domain Events, der er rejst af dette objekt.<br />
+Disse events sendes videre gennem en Event Dispatcher, som er placeret i Infrastructure-laget.</p>
+<p>Dispatcheren sender hændelserne ind i MediatR-pipelinen, hvor hver hændelse omsættes til en notifikation, som Application-laget kan reagere på.</p>
+<p>Domænet skal ikke kende MediatR og har ingen afhængighed til tekniske biblioteker.</p>
+<hr />
+<h2 id="5-hvordan-reagerer-application-laget"><strong>5. Hvordan reagerer Application-laget?</strong></h2>
+<p>I Application-laget ligger event handlers i de relevante vertical slices.<br />
+For eksempel i <em>Features/Posts/EventHandlers</em> håndteres hændelsen om, at et indlæg er blevet udgivet.</p>
+<p>Her kan vi udføre sideeffekter som:</p>
+<ul>
+<li>opdatere statistikker</li>
+<li>skrive audit-logs</li>
+<li>opdatere dashboardet</li>
+<li>sende beskeder videre til andre systemdele</li>
+</ul>
+<p>Det er kun Application-laget, der foretager disse opgaver.<br />
+Domænelaget har ingen viden om, hvad der sker efterfølgende.</p>
+<hr />
+<h2 id="6-hvordan-passer-det-ind-i-vertical-slice-architecture"><strong>6. Hvordan passer det ind i Vertical Slice Architecture?</strong></h2>
+<p>Vertical Slice betyder, at hver feature (fx Posts) indeholder alt, der vedrører den funktion: commands, queries, validators, event handlers osv.</p>
+<p>Domain Events passer godt ind, fordi:</p>
+<ul>
+<li>En event handler ligger i den slice, som er relevant for hændelsen.</li>
+<li>Hver slice kan reagere på events uden at få afhængigheder til andre slices.</li>
+<li>Nye slices kan tilføje flere handlers på den samme event uden at røre eksisterende kode.</li>
+</ul>
+<p>Det giver en naturlig, isoleret og let at udvide implementering.</p>
+<h2 id="7-afslutning">**7. Afslutning</h2>
+<p>Ved at kombinere Domain Events med Vertical Slice og Clean Architecture opnår projektet:</p>
+<ul>
+<li>En stærk adskillelse mellem forretningslogik og efterfølgende handlinger.</li>
+<li>Et domænelag uden teknisk støj og uden afhængigheder.</li>
+<li>Et application-lag der kan udvides slice for slice.</li>
+<li>Fleksibilitet til at bygge nye forløb, der reagerer på eksisterende hændelser.</li>
+<li>En arkitektur, der er robust, skalerbar og let at teste.</li>
+</ul>
+<h1 id="domain-events-vs-observer-pattern-og-hvorfor-vi-valgte-domain-events">Domain Events vs Observer Pattern (og hvorfor vi valgte Domain Events)**</h1>
+<p>I dette indlæg går vi i dybden med to patterns, der ligner hinanden i idé, men fungerer fundamentalt forskelligt i praksis:</p>
+<ul>
+<li><strong>Observer Pattern</strong></li>
+<li><strong>Domain Events (DDD)</strong></li>
+</ul>
+<p>Begge bruges til at reagere på hændelser.<br />
+Men de gør det på <em>vidt forskellige måder</em>, og valget har stor betydning for arkitektur, koblingsgrad og domænedesign.</p>
+<p>I vores projekt valgte vi <strong>Domain Events</strong> — og her forklarer vi præcis hvorfor.</p>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../Strategy%20pattern/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Strategy Pattern">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Strategy Pattern
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../Prototype%20implementering%20til%20projekt/" class="md-footer__link md-footer__link--next" aria-label="Next: Prototype">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Prototype
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.expand", "navigation.sections", "navigation.top", "navigation.footer"], "search": "../../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+    
+  </body>
+</html>
