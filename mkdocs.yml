@@ -11,6 +11,7 @@ theme:
     - navigation.sections
     - navigation.top
     - navigation.footer
+    - navigation.indexes
 
 plugins:
   - roamlinks
@@ -19,15 +20,17 @@ nav:
   - Hjem: index.md
 
   - AI-ML:
-      - Oversigt: AI-ML/Index.md
+      - Oversigt: AI-ML/index.md
       - Læringsmål: AI-ML/Læringsmål Ai & ML.md
       - Sikkerhed i chatbotten: AI-ML/Sikkerhed i forhold til projektet cahtbotten.md
+
       - AI-ML forståelse:
           - Oversigt: AI-ML/AI-ML-forståelse/index.md
           - LLM Modeller: AI-ML/AI-ML-forståelse/LLM Modeller.md
           - LLM og transformers: AI-ML/AI-ML-forståelse/LLM og transformers.md
           - RAG VS Finetuning: AI-ML/AI-ML-forståelse/RAG VS. Finetuning.md
           - Tokenisering og træning: AI-ML/AI-ML-forståelse/Tokenisering og træning.md
+
       - Projekter:
           - Oversigt: AI-ML/projekter/index.md
           - Chatbot test 1 – Setup & in-memory søgning: AI-ML/projekter/Chatbot i Python test 1. ( Setup & in memory vector søgning).md
@@ -38,15 +41,16 @@ nav:
           - Chatbot test 6 – Agent prototype: AI-ML/projekter/Chatbot 6 - Implementation af Agent prototype.md
 
   - Software-arkitektur:
-      - Oversigt: Software-arkitektur/Index/index.md
+      - Oversigt: Software-arkitektur/index.md
       - Læringsmål: Software-arkitektur/Læringsmål Software arkitektur.md
-      - Arkitekturvalg til projektet: Software-arkitektur/Arkitekturvalg til projektet.md
+
       - Projekter:
           - Oversigt: Software-arkitektur/Projekter/index.md
           - Factory Pattern: Software-arkitektur/Projekter/Factory pattern.md
           - Strategy Pattern: Software-arkitektur/Projekter/Strategy pattern.md
           - Observer vs Domain Event: Software-arkitektur/Projekter/Observer Pattern vs. Domain Event.md
           - Projekt arkitektur: Software-arkitektur/Projekter/Projekt arkitektur.md
+
       - Forståelse og analyse:
           - Oversigt: Software-arkitektur/Software arkitektur forståelse og analyse/index.md
           - Clean architecture & modulær monolith: Software-arkitektur/Software arkitektur forståelse og analyse/2. Clean architecture og modulær monolith..md
@@ -69,6 +73,7 @@ nav:
           - 8. Chatbot testprojekter: Blog/AI-ML-blog/8. AI & ML - Chatbots test projekter..md
           - 9. Chatbot udvikling: Blog/AI-ML-blog/9. AI & ML - Chatbot udvikling..md
           - 10. Agent implementering: Blog/AI-ML-blog/10. AI & ML - Projektrelateret agent implementering (2).md
+
       - Softwarearkitektur-blog:
           - Oversigt: Blog/Software-arkitektur-blog/index.md
           - 1. Software arkitektur & Design patterns: Blog/Software-arkitektur-blog/1. Software arkitektur & Design patterns.md
@@ -87,4 +92,3 @@ nav:
       - Deployment og services: Generelt/Deployment og services.md
       - Refleksioner: Generelt/Refleksioner til tidligere læring.md
       - Samfundsmæssige aspekter: Generelt/Samfundsmæssige aspekter.md
-
