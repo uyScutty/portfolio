@@ -17,6 +17,7 @@ theme:
 nav:
   - Forside: index.md
 
+
   - 📝 Blog:
       - 🤖 AI & ML:
           - Oversigt: Blog/AI-ML-blog/index.md
@@ -65,7 +66,8 @@ nav:
           - Chatbot test 3: AI-ML/projekter/Chatbot test 3. (RAG i terminal).md
           - Chatbot test 4: AI-ML/projekter/Chatbot test 4 (Rest API(Fast API) Gateway.md
           - Chatbot test 5: AI-ML/projekter/Chatbot test 5 Fra chatbot på vej mod agent - Foundation spikeprojekt med RAG & Ekstern LLM.md
-          - Agent prototype: AI-ML/projekter/Chatbot 6 - Implementation af Agent prototype.md
+          - Chatbot 6 – Implementation af Agent prototype: Blog/AI-ML-blog/chatbot-6.md
+
 
   - 🏗️ Software Arkitektur:
       - Oversigt: Software-arkitektur/index.md
@@ -92,4 +94,11 @@ nav:
       - Deployment & Services: Generelt/Deployment og services.md
       - Samfundsmæssige aspekter: Generelt/Samfundsmæssige aspekter.md
       - Refleksioner: Generelt/refleksioner til tidligere læring.md
+
+plugins:
+  - roamlinks:
+      wikilinks: true
+      image_dir: images
+
+
 
