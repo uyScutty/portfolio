@@ -33,7 +33,7 @@ Men da det virker til at AI-delen kræver lidt tilkobling udefra og da der iforh
 
 ---
 
-# 🟦 **2. Hexagonal Architectur
+#  **2. Hexagonal Architectur
 
 ## **Opbygning**
 
@@ -78,7 +78,7 @@ I et lille projekt som vores, hvor vi gerne vil holde tingene fleksible uden at 
 
 
 
-# 🟩 **3. Clean Architecture**
+#  **3. Clean Architecture**
 
 ## **Opbygning**
 
@@ -114,7 +114,7 @@ Clean Architecture virker til at passe godt til problemerne i vores projekt:
 
 ---
 
-# 🟧 **4. Vertical Slice Architecture**
+#  **4. Vertical Slice Architecture**
 
 
 ## **Opbygning**
@@ -146,7 +146,7 @@ Her er det en fin nem måde at opdele features og arbejde på tværs af hinanden
 
 
 
-# 🟥 **5. Microservices Architecture.
+#  **5. Microservices Architecture.
 
 jeg analyserede kort microservices for at se, om det passede.
 
@@ -170,7 +170,7 @@ jeg analyserede kort microservices for at se, om det passede.
 
 ---
 
-# 🟩 **6. Modulær Monolith (analyse af denne arkitekturform)**
+#  **6. Modulær Monolith 
 
 ## **Opbygning (generelt)**
 
