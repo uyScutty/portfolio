@@ -17,22 +17,74 @@ plugins:
 
 nav:
   - Hjem: index.md
-  - AI-ML:
-      - AI-ML/index.md
-      - AI-ML-forståelse:
-          - AI-ML/AI-ML-forståelse/index.md
-      - Projekter:
-          - AI-ML/projekter/index.md
 
-  - Blog:
-      - Software Arkitektur Blog:
-          - Blog/Software-arkitektur-blog/index.md
-      - AI & ML Blog:
-          - Blog/AI-ML-blog/index.md
+  - AI-ML:
+      - Oversigt: AI-ML/Index.md
+      - Læringsmål: AI-ML/Læringsmål Ai & ML.md
+      - Sikkerhed i chatbotten: AI-ML/Sikkerhed i forhold til projektet cahtbotten.md
+      - AI-ML forståelse:
+          - Oversigt: AI-ML/AI-ML-forståelse/index.md
+          - LLM Modeller: AI-ML/AI-ML-forståelse/LLM Modeller.md
+          - LLM og transformers: AI-ML/AI-ML-forståelse/LLM og transformers.md
+          - RAG VS Finetuning: AI-ML/AI-ML-forståelse/RAG VS. Finetuning.md
+          - Tokenisering og træning: AI-ML/AI-ML-forståelse/Tokenisering og træning.md
+      - Projekter:
+          - Oversigt: AI-ML/projekter/index.md
+          - Chatbot test 1 – Setup & in-memory søgning: AI-ML/projekter/Chatbot i Python test 1. ( Setup & in memory vector søgning).md
+          - Chatbot test 2 – Persistens: AI-ML/projekter/Chatbot i python test 2. (Persitens).md
+          - Chatbot test 3 – RAG i terminalen: AI-ML/projekter/Chatbot test 3. (RAG i terminal).md
+          - Chatbot test 4 – FastAPI Gateway: AI-ML/projekter/Chatbot test 4 (Rest API(Fast API) Gateway.md
+          - Chatbot test 5 – Foundation & ekstern LLM: AI-ML/projekter/Chatbot test 5 Fra chatbot på vej mod agent - Foundation spikeprojekt med RAG & Ekstern LLM.md
+          - Chatbot test 6 – Agent prototype: AI-ML/projekter/Chatbot 6 - Implementation af Agent prototype.md
 
   - Software-arkitektur:
-      - Software-arkitektur/index.md
+      - Oversigt: Software-arkitektur/Index/index.md
+      - Læringsmål: Software-arkitektur/Læringsmål Software arkitektur.md
+      - Arkitekturvalg til projektet: Software-arkitektur/Arkitekturvalg til projektet.md
+      - Projekter:
+          - Oversigt: Software-arkitektur/Projekter/index.md
+          - Factory Pattern: Software-arkitektur/Projekter/Factory pattern.md
+          - Strategy Pattern: Software-arkitektur/Projekter/Strategy pattern.md
+          - Observer vs Domain Event: Software-arkitektur/Projekter/Observer Pattern vs. Domain Event.md
+          - Projekt arkitektur: Software-arkitektur/Projekter/Projekt arkitektur.md
+      - Forståelse og analyse:
+          - Oversigt: Software-arkitektur/Software arkitektur forståelse og analyse/index.md
+          - Clean architecture & modulær monolith: Software-arkitektur/Software arkitektur forståelse og analyse/2. Clean architecture og modulær monolith..md
+          - Vertical slice: Software-arkitektur/Software arkitektur forståelse og analyse/3.Vertical slice.md
+          - Arkitektur gennemgang og analyser: Software-arkitektur/Software arkitektur forståelse og analyse/Arkitektur gennemgang og korte analyser..md
+          - CQRS og vertical slice: Software-arkitektur/Software arkitektur forståelse og analyse/CQRS i vores projekt med vertical slice.md
+          - DDD patterns: Software-arkitektur/Software arkitektur forståelse og analyse/Domæne driven design - DDD patterns..md
+          - Repository pattern: Software-arkitektur/Software arkitektur forståelse og analyse/Repository pattern i vores projekt..md
+
+  - Blog:
+      - AI-ML blog:
+          - Oversigt: Blog/AI-ML-blog/index.md
+          - 1. Læringsmål & opstart: Blog/AI-ML-blog/1. AI & ML - Læringsmål og opstart.md
+          - 2. Basis viden: Blog/AI-ML-blog/2. AI & ML - Basis viden NLP, ML & AI..md
+          - 3. LLM modeller: Blog/AI-ML-blog/3. AI & ML - LLM modeller og transformers.md
+          - 4. LLM og tokenisering: Blog/AI-ML-blog/4. AI & ML - LLM, tokenisering og algoritmer.md
+          - 5. Transformers: Blog/AI-ML-blog/5. AI & ML - Transformer og specifikke modeller.md
+          - 6. RAG vs Finetuning: Blog/AI-ML-blog/6. AI & ML - RAG VS. Finetuning.md
+          - 7. RAG & videre arbejde: Blog/AI-ML-blog/7. AI & ML RAG VS Finetunnin og videre arbejde med python.md
+          - 8. Chatbot testprojekter: Blog/AI-ML-blog/8. AI & ML - Chatbots test projekter..md
+          - 9. Chatbot udvikling: Blog/AI-ML-blog/9. AI & ML - Chatbot udvikling..md
+          - 10. Agent implementering: Blog/AI-ML-blog/10. AI & ML - Projektrelateret agent implementering (2).md
+      - Softwarearkitektur-blog:
+          - Oversigt: Blog/Software-arkitektur-blog/index.md
+          - 1. Software arkitektur & Design patterns: Blog/Software-arkitektur-blog/1. Software arkitektur & Design patterns.md
+          - 2. Software arkitektur & Design patterns (2): Blog/Software-arkitektur-blog/2. Software arkitektur & Design patterns..md
+          - 3. Software arkitektur & Design Patterns: Blog/Software-arkitektur-blog/3. Software arkitektur & Design Patterns.md
+          - 4. Software arkitektur & Design patterns: Blog/Software-arkitektur-blog/4. Software arkitektur & Design patterns.md
+          - 5. Software arkitektur & Design patterns: Blog/Software-arkitektur-blog/5. Software arkitektur & Design patterns.md
+          - 6. Software arkitektur & Design patterns: Blog/Software-arkitektur-blog/6. Software arkitektur & Design patterns.md
+          - 7. Software arkitektur (del 7): Blog/Software-arkitektur-blog/7. Software arkitektur & Design patterns..md
+          - 8. Vertical Slice & features: Blog/Software-arkitektur-blog/8.  Vertical Slice og en anden struktur på features..md
+          - 9. DDD: Blog/Software-arkitektur-blog/9.  DDD - Forståelse af domænet..md
+          - 10. Afslutning: Blog/Software-arkitektur-blog/10. Afslutning.md
 
   - Generelt:
-      - Generelt/index.md
+      - Oversigt: Generelt/index.md
+      - Deployment og services: Generelt/Deployment og services.md
+      - Refleksioner: Generelt/Refleksioner til tidligere læring.md
+      - Samfundsmæssige aspekter: Generelt/Samfundsmæssige aspekter.md
 
