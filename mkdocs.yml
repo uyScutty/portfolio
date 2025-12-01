@@ -19,14 +19,11 @@ nav:
   - Hjem: index.md
   - AI-ML:
       - AI-ML/index.md
-      - AI-ML-forståelse:
-          - AI-ML/AI-ML-forståelse/index.md
-      - Projekter:
-          - AI-ML/projekter/index.md
   - Software-arkitektur:
       - Software-arkitektur/index.md
   - Blog:
       - Blog/index.md
   - Generelt:
       - Generelt/index.md
+
 
