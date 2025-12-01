@@ -3,7 +3,7 @@ site_description: Min læringsportfolio for AI, ML og Software Arkitektur
 
 docs_dir: docs
 site_dir: site
-
+#trigger
 theme:
   name: material
   features:
