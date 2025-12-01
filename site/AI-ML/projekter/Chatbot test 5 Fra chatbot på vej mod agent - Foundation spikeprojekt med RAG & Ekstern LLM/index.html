@@ -136,46 +136,6 @@
     
     
     
-      
-      
-        <label class="md-header__button md-icon" for="__search">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        </label>
-        <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </nav>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-      
-    
     
   </nav>
   
@@ -1933,7 +1893,7 @@
   <span class="md-ellipsis">
     
   
-    Agent prototype
+    Chatbot 6 – Implementation af Agent prototype
   
 
     
@@ -2921,7 +2881,7 @@
 <p>Jeg startede med at hente html indholdet fra den originale side www.thewayofcoherence.com og ekstrahere teksten fra siderne og renset det via AI.
 Jeg har hentet en række blog indlæg og informationer som about, consultation, contact mv.
 De er hentet i HTML format og det er derefter blevet struktureret i et json-objekt på følgende måde.</p>
-<p>![[Pasted image 20251125174337.png]]</p>
+<p><img alt="Pasted image 20251125174337.png" src="../../../images/Pasted%20image%2020251125174337.png" /></p>
 <p>bagefter sakl vi lave vores embeddings og vector index via:</p>
 <ul>
 <li>
@@ -2941,7 +2901,7 @@ De er hentet i HTML format og det er derefter blevet struktureret i et json-obje
 </li>
 </ul>
 <p>Jeg oprettede derfor en ny python fil kaldet build_vector_store.py</p>
-<p>![[Pasted image 20251126000552.png]]
+<p><img alt="Pasted image 20251126000552.png" src="../../../images/Pasted%20image%2020251126000552.png" />
 Modellen laver her chunks af teksten og laver dem derefter om til vektor og laver embeddings ud af chunks delene af teksten.</p>
 <p>Der bliver herefter oprettet et FAISS-Index hvor alle embeddings bliver lagt ind og der kan søges i dem ved queries.
 Det bliver herefter gemt lokalt.</p>
@@ -2954,11 +2914,11 @@ Det bliver herefter gemt lokalt.</p>
 ✔ Du kan loade indexet direkte i FastAPI<br />
 ✔ Du behøver ikke lave embeddings hver gang</p>
 <p>Ved kørsel af filen build_vector_store.py så bliver datasættet lavet til 28 chunks.
-![[Pasted image 20251127155330.png]]</p>
+<img alt="Pasted image 20251127155330.png" src="../../../images/Pasted%20image%2020251127155330.png" /></p>
 <p>Der er nu bygget en fuld RAG-motor med chunking, embeddings og FAISS.<br />
 Næste skridt er at forbinde denne motor til OpenAI og bygge den faktiske chatbot-adfærd (guiding, forslag, svar, handlinger).”</p>
 <p>Den nuværende rag_engine.py står på nuværende tidspunkt for at håndtere RAG med lokalt AI genereret svar, dog uden prompt builder og derfor skal vi have tilføjet rolle til at styre dens agering og svar til brugeren.</p>
-<p>![[Pasted image 20251126115026.png]]</p>
+<p><img alt="Pasted image 20251126115026.png" src="../../../images/Pasted%20image%2020251126115026.png" /></p>
 <p>Her har vi nu en skabelonen til en mere relevant chatbot, der kan læse de relevante chunks, forstå dem, formulere et kort svar ud fra disse og guide på siden. Det bliver til <strong>Retriever → Prompt Builder → Generator</strong>.<br />
 Det er ren RAG-arkitektur.</p>
 <p><code>rag_engine.py</code> blev udvidet, så den ikke kun håndterer vektorsøgning (FAISS), men også selve AI-svaret.<br />
@@ -2989,7 +2949,7 @@ Search-funktionen er uændret og står fortsat kun for retrieval.</p>
 </li>
 </ol>
 <p>Vi tager det stille og roligt</p>
-<p>![[Pasted image 20251126115608.png]]</p>
+<p><img alt="Pasted image 20251126115608.png" src="../../../images/Pasted%20image%2020251126115608.png" /></p>
 <h1 id="hvad-denne-version-nu-gr">Hvad denne version nu gør</h1>
 <p>⚡ <strong>Brugeren spørger → http://localhost:8000/ask?query=noget</strong></p>
 <p>API’en gør:</p>
@@ -2998,17 +2958,17 @@ Search-funktionen er uændret og står fortsat kun for retrieval.</p>
 <h3 id="2-generate_ai_answerquery-docs">2️⃣ <code>generate_ai_answer(query, docs)</code></h3>
 <p>→ Bygger prompt<br />
 → Sender til Llama3 (via Ollama)</p>
-<p>![[Pasted image 20251126130533.png]]</p>
+<p><img alt="Pasted image 20251126130533.png" src="../../../images/Pasted%20image%2020251126130533.png" /></p>
 <p>Efter at have arbejdet med den lokale version af chatbotten fra ollama, så går jeg nu over til implmentation af OpenAI API inegration. 
 Først henter jeg en key fra openAI og ligger i en .env fil.
 Det er fra denne fil vores rag_engine.py fil skal kunne læse API nøglen og bruge den aktivt.</p>
-<p>![[Pasted image 20251126135849.png]]
+<p><img alt="Pasted image 20251126135849.png" src="../../../images/Pasted%20image%2020251126135849.png" />
 Den er nu blevet ændret til at importere OpenAI modellen og loade klienten.</p>
 <p>Så ændrer jeg koden til  funktionen til at generere AI svar. og ændrer det fra at bruge ollama til openAI.</p>
 <p>Få “helpful assistant mode” sat op**</p>
 <p>Efter skiftet til OpenAI lavede vi en helt ny prompt-struktur, så modellen ikke bare “taler”, men opfører sig som en <em>guide-bot</em>.</p>
 <p>Vi lagde en systembesked ind:
-![[Pasted image 20251126140122.png]]
+<img alt="Pasted image 20251126140122.png" src="../../../images/Pasted%20image%2020251126140122.png" />
 generate_ai_answer = <strong>sender beskeden</strong> til modellen og <strong>henter svaret</strong>.</p>
 <p>System-beskeden er <strong>den vigtigste besked i hele prompt-strukturen</strong>.</p>
 <p>Den fortæller modellen:</p>
@@ -3142,13 +3102,13 @@ Du skal bruge konteksten der findes via RAG, ellers generer et svar udfra egen v
         
         
           
-          <a href="../Chatbot%206%20-%20Implementation%20af%20Agent%20prototype/" class="md-footer__link md-footer__link--next" aria-label="Next: Agent prototype">
+          <a href="../Chatbot%206%20-%20Implementation%20af%20Agent%20prototype/" class="md-footer__link md-footer__link--next" aria-label="Next: Chatbot 6 – Implementation af Agent prototype">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Agent prototype
+                Chatbot 6 – Implementation af Agent prototype
               </div>
             </div>
             <div class="md-footer__button md-icon">

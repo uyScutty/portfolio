@@ -136,46 +136,6 @@
     
     
     
-      
-      
-        <label class="md-header__button md-icon" for="__search">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        </label>
-        <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </nav>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-      
-    
     
   </nav>
   
@@ -1799,7 +1759,7 @@
   <span class="md-ellipsis">
     
   
-    Agent prototype
+    Chatbot 6 – Implementation af Agent prototype
   
 
     
@@ -2657,11 +2617,11 @@ Hvordan den gør brug af vector og persistens. Det er en fortsættelse af først
 <p>Retrieval Argumented Generation (RAG) er en metode hvor der gennemgås lokale data for informationer og oplysninger, inden der genereres et svar på en forespørgsel af LLM modellen.
 Her kan der fx. bruges Few Shot Prompting, hvor der er gennemgåes en række svarmuligheder for at generere det bedst mulige svar.
 At fine tuning ligesom RAG giver en god mulighed for at påvirke LLM modellens output til en specifik forespørgsel. Her skal den dog trænes.
-[[RAG VS. Finetuning]]
+<a href="../../../AI-ML/AI-ML-forst%C3%A5else/RAG%20VS.%20Finetuning/">RAG VS. Finetuning</a>
 Jeg har arbejdet med projektet og lavet første simple del via huggingface biblioteket.
-[[Chatbot i Python test 1. ( Setup &amp; in memory vector søgning)]]</p>
+<a href="../../../AI-ML/projekter/Chatbot%20i%20Python%20test%201.%20%28%20Setup%20%26%20in%20memory%20vector%20s%C3%B8gning%29/">Chatbot i Python test 1. ( Setup &amp; in memory vector søgning)</a></p>
 <p>Derudover har jeg arbejdet med et andet projekt:
-[[Chatbot i python test 2. (Persitens)]]</p>
+<a href="../../../AI-ML/projekter/Chatbot%20i%20python%20test%202.%20%28Persitens%29/">Chatbot i python test 2. (Persitens)</a></p>
 <hr />
 <p>Samtidig begyndte jeg at arbejde videre med RAG i Python-projektet.<br />
 Her er forskellen tydelig: i stedet for at træne modellen om, så henter RAG relevante tekststykker fra mine dokumenter og bruger dem som kontekst.</p>

@@ -136,46 +136,6 @@
     
     
     
-      
-      
-        <label class="md-header__button md-icon" for="__search">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        </label>
-        <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </nav>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-      
-    
     
   </nav>
   
@@ -1723,7 +1683,7 @@
   <span class="md-ellipsis">
     
   
-    Agent prototype
+    Chatbot 6 – Implementation af Agent prototype
   
 
     
@@ -2658,25 +2618,25 @@ Når subject ændrer sig, notificerer den alle observers direkte.</p>
 </ul>
 <h3 id="observer-pattern_1">Observer Pattern</h3>
 <p>Her ses opbygningen af mit observer spikeprojekt.
-![[Pasted image 20251121115652.png]]</p>
+<img alt="Pasted image 20251121115652.png" src="../../../images/Pasted%20image%2020251121115652.png" /></p>
 <h3 id="1-subject-contentpublisher"><strong>1) Subject → ContentPublisher</strong></h3>
 <p>Den der udsender beskeder / hændelser.<br />
 ContentPublisher implementerer <strong>ISubject</strong>, som er kontrakten for et subject.<br />
 Her kan observers blive <strong>tilmeldt (Attach)</strong> eller <strong>frameldt (Detach)</strong>.<br />
 Når noget sker, kalder subject <strong>Notify</strong>, som sender en besked til alle observers.</p>
-<p>![[Pasted image 20251121121805.png]]</p>
+<p><img alt="Pasted image 20251121121805.png" src="../../../images/Pasted%20image%2020251121121805.png" /></p>
 <h3 id="2-observers-emailsubscriber-pushsubscriber"><strong>2) Observers → EmailSubscriber / PushSubscriber</strong></h3>
 <p>Modtagere af beskeder.<br />
 De implementerer <strong>IObserver</strong>, som er kontrakten for hvordan observers reagerer.<br />
 Når de modtager <code>Update(message)</code>, håndterer de hændelsen på hver deres måde.</p>
-<p>![[Pasted image 20251121123919.png]]</p>
+<p><img alt="Pasted image 20251121123919.png" src="../../../images/Pasted%20image%2020251121123919.png" /></p>
 <h3 id="3-interfaces-isubject-og-iobserver"><strong>3) Interfaces → ISubject og IObserver</strong></h3>
 <p>Kontrakten for hvordan subject og observers skal opføre sig.<br />
 ISubject styrer notifikationerne.<br />
 IObserver styrer hvordan subscribers reagerer.
-![[Pasted image 20251121122737.png]]</p>
+<img alt="Pasted image 20251121122737.png" src="../../../images/Pasted%20image%2020251121122737.png" /></p>
 <p>ISubject er kontrakten for publishers (ContentPublisher) og udsendelsen af beskeder og hændelser
-![[Pasted image 20251121123007.png]]</p>
+<img alt="Pasted image 20251121123007.png" src="../../../images/Pasted%20image%2020251121123007.png" /></p>
 <h3 id="flowet-i-min-kode"><strong>Flowet i min kode</strong></h3>
 <ol>
 <li>Observers tilmelder sig via <code>Attach()</code></li>
@@ -2691,7 +2651,7 @@ Det gør systemet fleksibelt og udvideligt.</p>
 <p>Her har jeg afprøvet et domain event implementering for at sammenligne med Observer pattern.
 Jeg har i dette Spike Project ikke brugt MediatR til at styre handlers for at få et bedre indblik i hvordan DDD-event fungerer reelt.</p>
 <p>Her er projektets opbygning.
-![[Pasted image 20251121134220.png]]</p>
+<img alt="Pasted image 20251121134220.png" src="../../../images/Pasted%20image%2020251121134220.png" /></p>
 <h3 id="application-laget"><strong>Application-laget</strong></h3>
 <p>Her ligger klasser, der <strong>håndterer hændelser</strong> og styrer, hvad der skal ske i systemet.</p>
 <ul>
@@ -2738,11 +2698,11 @@ Jeg har i dette Spike Project ikke brugt MediatR til at styre handlers for at f�
 <p>EventBus
 EventBus er programmets central, der styrer indkomne events.
 Den ved hvordan de kaldes og den ved hvilke handlers der håndterer hvilke events og kan derfor distriuere dem til den korrekte handler. I dette projekt har vi DomainEventBus som vores eventBus.</p>
-<p>![[Pasted image 20251121134623.png]]
+<p><img alt="Pasted image 20251121134623.png" src="../../../images/Pasted%20image%2020251121134623.png" />
 Priavte readonly List..- Her laves listen over alle typer eventhandlers.
 i RegisterHandler metoden - Her registreres en handler og bliver gemt til et domain event. Det er her den korrekte handler registreres. Den der lytter efter eventet.
 PublishAsync metoden - Her sendes eventet ud i systemet og metoden udføres på eventet.</p>
-<p>![[Pasted image 20251121135800.png]]</p>
+<p><img alt="Pasted image 20251121135800.png" src="../../../images/Pasted%20image%2020251121135800.png" /></p>
 <p>I PostPublishedEvent - Der implmenteres kontrakten fra IDomainEventHandler.
 Den lytter altså efter PostPublishedEvent og bliver deror kaldt af DomainEventBus.</p>
 <p>De 3 services fra EmailNotifier, ContentService og DomainEventBus bliver injiceret i constructoren, så de kan bruges.
@@ -2753,15 +2713,15 @@ DomainEventBus - Kan publisere event fra domænet.</p>
 Den udfører logikken for EmailNotifier og ContentService.</p>
 <p>Til sidst bliver der via foreach - Foreach tager hvert event, som domænet selv har skabt, og sender det tilbage ind i event-systemet, så de også bliver håndteret.
 Her bruges liste som standard for at kunne håndtere flere events. Hvis flere events udløses som fx. notifikationer eller logging.
-![[Pasted image 20251121140922.png]]</p>
+<img alt="Pasted image 20251121140922.png" src="../../../images/Pasted%20image%2020251121140922.png" /></p>
 <p>ContentService
-![[Pasted image 20251121144458.png]]
+<img alt="Pasted image 20251121144458.png" src="../../../images/Pasted%20image%2020251121144458.png" />
 Her kan der skabes events i _pendingEvents
 Og via publishPost() - publiseres post og genereres et nyt domæne event.</p>
 <p>ContentSerivce ligger i domænelaget, da den publiserer post og domæne events.</p>
 <p>Dette kan derefter bruges af PostPublishHandler - Der kan hente listen og sende events videre i EventBus.
 ContentService udfører forretningslogik og genererer nye Domain Events, som gemmes i en liste, så de senere kan sendes videre til EventBus og blive håndteret.</p>
-<p>![[Pasted image 20251121145221.png]]
+<p><img alt="Pasted image 20251121145221.png" src="../../../images/Pasted%20image%2020251121145221.png" />
 PostPublishedEvent - Indeholder de data handlers bruger, her i form af author og title og den repræsenterer hændelsen at " Et indlæg blev publiceret"
 Den repræsenterer hvad der sker i domænet og hører derfor til i domænelaget.</p>
 <p>EmailNotifier - simulerer sending af email og ligger i infrastructure da den hører til ydre services der kobles på systemet.</p>
