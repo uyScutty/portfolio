@@ -63,9 +63,9 @@ nav:
           - Chatbot test 1: AI-ML/projekter/Chatbot i Python test 1. ( Setup & in memory vector søgning).md
           - Chatbot test 2: AI-ML/projekter/Chatbot i python test 2. (Persitens).md
           - Chatbot test 3: AI-ML/projekter/Chatbot test 3. (RAG i terminal).md
-          - Chatbot test 4: AI-ML/projekter/Chatbot test 4 (Rest API(Fast API) Gateway..md
-          - Chatbot test 5: AI-ML/projekter/Chatbot test 5 Fra chatbot på vej mod ag....md
-          - Agent prototype: AI-ML/projekter/Prototype til projekt/Chatbot 6 - Implementation af Agent prototype i swagger.md
+          - Chatbot test 4: AI-ML/projekter/Chatbot test 4 (Rest API(Fast API) Gateway.md
+                    - Chatbot test 5: AI-ML/projekter/Chatbot test 5 Fra chatbot på vej mod agent - Foundation spikeprojekt med RAG & Ekstern LLM.md
+                    - Agent prototype: AI-ML/projekter/Chatbot 6 - Implementation af Agent prototype.md
 
   - 🏗️ Software Arkitektur:
       - Oversigt: Software-arkitektur/index.md
@@ -93,4 +93,3 @@ nav:
       - Samfundsmæssige aspekter: Generelt/Samfundsmæssige aspekter.md
       - Refleksioner: Generelt/refleksioner til tidligere læring.md
 
-      
