@@ -3,7 +3,7 @@ site_description: Min læringsportfolio for AI, ML og Software Arkitektur
 
 docs_dir: docs
 site_dir: site
-#trigger
+
 theme:
   name: material
   features:
@@ -19,11 +19,20 @@ nav:
   - Hjem: index.md
   - AI-ML:
       - AI-ML/index.md
+      - AI-ML-forståelse:
+          - AI-ML/AI-ML-forståelse/index.md
+      - Projekter:
+          - AI-ML/projekter/index.md
+
+  - Blog:
+      - Software Arkitektur Blog:
+          - Blog/Software-arkitektur-blog/index.md
+      - AI & ML Blog:
+          - Blog/AI-ML-blog/index.md
+
   - Software-arkitektur:
       - Software-arkitektur/index.md
-  - Blog:
-      - Blog/index.md
+
   - Generelt:
       - Generelt/index.md
-
 
