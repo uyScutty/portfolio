@@ -1,8 +1,6 @@
 # **Læringsside – Uddybning til Etape 3 (Tokenisering & Modeltræning)**
 
-Denne side uddyber de begreber du kort nævner i blogindlægget. Den kan bruges som “ekstra forklaring” til dig selv eller som bilag, hvis nogen skal forstå læringen bag.
 
----
 
 ## 🧩 **Hvad er tokenisering – og hvorfor er det vigtigt?**
 
