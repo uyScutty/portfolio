@@ -152,7 +152,6 @@ OpenAI og Claude kan være dyrere, fordi deres tokenizers splitter dansk + medic
 
 ## 🆚 **Hvorfor forskellige modeller giver forskellige resultater**
 
-Din blog nævner forskelle mellem modeller.
 
 Tokenisering spiller en rolle fordi:
 
@@ -176,86 +175,3 @@ Dette forklarer hvorfor:
 - prisen ændrer sig fra model til model
     
 
----
-
-## 🩺 **Relevans for dit sundhedsprojekt**
-
-Når du bygger chatagenter der skal håndtere sundhedsindhold, skal du være opmærksom på:
-
-1. **Hvilken tokenizer modellen bruger**  
-    → påvirker forståelse af medicinske ord.
-    
-2. **Hvor mange tokens der bruges**  
-    → påvirker pris og begrænsninger i kontekst.
-    
-3. **Modeltræningen**  
-    → nogle modeller har set mere sundhedsdata end andre.
-    
-4. **Dokumenternes længde**  
-    → vigtig ved RAG, hvor tekst chunkes efter tokens.
-    
-
-Alt dette har betydning for præcision og kvalitet i dine chatagenter.
-
----
-
-# ✔️ Denne læringsside matcher direkte til:
-
-**“Mål for etapen”**  
-→ du ønskede at gå dybere i forståelsen af tokenisering og modeltræning.
-
-**“Hvad jeg lærte”**  
-→ du nævnte BPE, WordPiece og subwords — her er uddybningen af det.
-
-**“Refleksioner”**  
-→ forskelle mellem modeller, forståelse af sundhedsdata, og hvad det betyder i praksis.
-
-# 🧩 **Hvordan laver den chunks? (kort svar)**
-
-Den tager **lange tekster** og deler dem op i **mindre stykker**, typisk:
-
-- 300–500 ord
-    
-- klippet ved punktummer
-    
-- aldrig tilfældigt
-    
-- men det er simpel splitting
-    
-
-Formålet:  
-✔ gøre teksterne nemmere at embedde  
-✔ gøre søgning mere præcis  
-✔ undgå for store embeddings
-
----
-
-# 🧩 **Hvad er en embedding? (super kort)**
-
-En _embedding_ er:
-
-➡️ **en liste af tal som repræsenterer meningen i teksten**  
-fx:
-
-`[0.12, -0.55, 0.87, ...]  (384 tal)`
-
-Det er IKKE ord  
-Det er IKKE tokens  
-Det er betydning.
-
----
-
-# 🧩 **Hvad er en vektor? (endnu kortere)**
-
-En embedding _er_ en vektor.
-
-Så:
-
-- **Embedding** = betydningsvector
-    
-- **Vector** = talrække der kan bruges i matematisk søgning
-    
-
-FAISS bruger disse vektorer til:
-
-➡️ finde de tekststykker som ligner mest din query.
