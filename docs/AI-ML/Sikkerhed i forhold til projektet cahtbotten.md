@@ -1,7 +1,7 @@
 
 # **1. Sikkerhed i botten (det vi allerede HAR tænkt ind)**
 
-Der er **tre typer sikkerhed** i en RAG-chatbot:
+
 
 ### **A) Indholds-sikkerhed (Content Safety)**
 
