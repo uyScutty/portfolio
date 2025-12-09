@@ -1,97 +1,101 @@
 # **Læringsside – Uddybning til Etape “RAG vs. Fine-tuning”**
 
-_(skrevet som om det er dig, i samme tone som dine øvrige blogs)_
 
----
+Forklaring af forskellen mellem RAG og Fine-tuning
 
-## 🔎 Min uddybede forståelse af RAG og Fine-tuning
+RAG (Retrieval-Augmented Generation) og fine-tuning er to meget forskellige tilgange til at udvide en LLMs evne til at besvare domænespecifikke spørgsmål. De løser forskellige problemer og har forskellige styrker.
 
-I denne etape begyndte jeg at arbejde mere konkret med forskellen mellem RAG og fine-tuning, og hvad der faktisk giver mening i forhold til de tre forskellige agenter vi skal bygge i projektet. Det blev hurtigt tydeligt for mig, at selvom begge begreber ofte nævnes sammen, så løser de to ting meget forskellige problemer – og har meget forskellige fordele.
+1. RAG – Retrieval-baseret viden
 
----
+RAG tilføjer ekstern viden til en generativ model uden at ændre på selve modellen.
+Modellen forbliver uændret, og alt domænespecifikt indhold leveres som kontekst ved hver forespørgsel.
 
-## 🧠 RAG – det jeg arbejder mest med
+Sådan fungerer RAG
 
-RAG (Retrieval Augmented Generation) er i bund og grund en tilgang hvor modellen ikke kun baserer sit svar på det, den allerede er trænet på, men også på ny information, som jeg giver den via lokale dokumenter.
+Brugeren stiller et spørgsmål.
 
-Processen i RAG har jeg efterhånden fået godt styr på:
+Systemet henter relevante dokumenter ved hjælp af embeddings og en vektor-database.
 
-1. Brugeren spørger om noget
-    
-2. Der hentes relevante tekststykker fra mine egne dokumenter (via embeddings og vector-database)
-    
-3. Disse tekststykker bliver sendt ind som kontekst
-    
-4. Modellen svarer ud fra både prompten _og_ de dokumenter jeg har valgt
-    
+De relevante tekststykker bliver tilføjet som kontekst i prompten.
 
-Det er også denne tilgang, jeg arbejder med i mit Python-projekt lige nu – hvor jeg bruger Chroma som vektor-database og embeddings til at finde relevant viden.  
-Jeg bruger også few-shot prompting til at styre tonen og formen på svarene.
+Modellen svarer ud fra både prompt og dokumenter.
 
-Det er en fleksibel løsning, fordi jeg kan opdatere alt indholdet når som helst, uden at skulle træne en model om.
+Hvad RAG bruges til
 
----
+Når viden ændrer sig ofte
 
-## 🧪 Fine-tuning – forstået i forhold til mit projekt
+Når der er mange dokumenter
 
-Fine-tuning er en anden tilgang, hvor man tager en eksisterende model og træner den videre på specifik data.  
-Modellen ændrer sig altså reelt, når man fine-tuner den.
+Når svaret skal være faktisk forankret i specifikke tekster
 
-Det giver fordele ved:
+Når man vil undgå at træne en model
 
-- meget faste opgaver
-    
-- specifik skrivestil
-    
-- gentagne formater
-    
-- klassifikationsopgaver
-    
+Når man vil have fuld kontrol over hvilke dokumenter der bruges
 
-Men i mit projekt er behovet noget andet.  
-Jeg har mange tekster, der ændrer sig over tid, og tre forskellige chatagenter, der hver især skal kunne håndtere både generelle og domænespecifikke spørgsmål.  
-Hvis jeg skulle fine-tune, skulle jeg gentage processen hver gang jeg opdaterer viden, og det giver ikke mening i mit setup.
+Fordele
 
-Det blev derfor tydeligere for mig, at fine-tuning ikke rigtig løser det behov jeg har.  
-Til gengæld kan jeg godt bruge few-shot prompting til at styre stil og svar uden at skulle træne modellen.
+Fleksibel: dokumenter kan opdateres når som helst.
 
----
+Billig: ingen træning nødvendig.
 
-## 🩺 Relevans for de tre agenter i projektet
+Transparent: man kan altid se hvilke kilder modellen brugte.
 
-Når jeg kobler RAG og fine-tuning sammen med mine konkrete scenarier, giver det her billede:
+2. Fine-tuning – modelbaseret læring
 
-### **1) Sundhedsagenten**
+Fine-tuning ændrer selve modellen ved at træne den videre på nye data.
+Det betyder, at modellen indbygger mønstre, stil og viden direkte i sine parametre.
 
-Skal kunne trække korrekt viden fra mange tekster.  
-Det er helt oplagt at bruge RAG her, så svarene bygger på dokumenterne og ikke på modellens egne gæt.
+Hvad fine-tuning bruges til
 
-### **2) Den halvspecialiserede agent**
+Faste svarformater
 
-Fx til velvære, coaching eller lignende.  
-Her kan jeg genbruge RAG-modellen og bare tilføje nye dokumenter.
+Konsistent skrivestil
 
-### **3) Navigationsagenten (den jeg selv har ansvar for)**
+Smalle og gentagne opgaver
 
-Denne agent skal kunne pege brugeren rundt på siden og forklare indholdet.  
-Teksterne vil ændre sig løbende, og derfor er RAG langt mere fleksibel end fine-tuning.
+Klassifikation og strukturerede outputs
 
----
+Når modellen skal opføre sig på en bestemt måde hver gang
 
-## 🎯 Min egen konklusion
+Hvornår fine-tuning ikke er ideelt
 
-Efter at have arbejdet med begge metoder – og især efter at have implementeret dele af RAG selv – giver det mest mening at fortsætte på den vej.  
-Fine-tuning virker som en større og tungere proces, og den løser ikke noget, jeg ikke allerede kan gøre med:
+Når indhold ændrer sig ofte (kræver løbende retræning)
 
-- RAG
-    
-- få-shot prompts
-    
-- god kontekst
-    
-- embeddings
-    
-- og opdaterbare dokumenter
-    
+Når der er mange dokumenter med detaljeret viden
 
-Derfor giver RAG mest mening til alle tre agenttyper i projektet, og det er også den tilgang jeg fortsætter med i mit Python-projekt.
+Når man har brug for faktuelle referencer og opdaterbar viden
+
+Når man arbejder med bredt domæneindhold der skifter over tid
+
+3. Sammenligning
+Dimension	RAG	Fine-tuning
+Hvad ændres?	Ingen modelændring. Kun dokumenter.	Selve modellen ændres.
+Opdatering af viden	Meget let – tilføj eller erstat dokumenter.	Kræver ny træning.
+Bedst til	Faktuelt indhold, der ændrer sig.	Fast form/skrivestil.
+Krav	Embeddings + vector store.	Træningsdata + GPU.
+Output	Svar baseret på dokumenter + prompt.	Svar baseret på modelens indlærte parametre.
+4. Hvorfor man ofte vælger RAG
+
+RAG fungerer godt når:
+
+systemet skal trække direkte på tekstkilder, artikler eller opslagsværk
+
+viden opdateres ofte
+
+man vil have fuld kontrol over hvad modellen må bruge
+
+forskellige agenter skal deles om samme videns-base
+
+finetuning ville være unødigt tunge processer
+
+RAG giver desuden mulighed for at styre både tone og adfærd via few-shot prompting, uden behov for træning.
+
+5. Kort opsummering
+
+RAG tilføjer kontekst – modellen læser dokumenterne ved hver forespørgsel.
+
+Fine-tuning tilføjer færdigheder eller stil – modellen ændrer sin adfærd permanent.
+
+RAG er bedst, når viden ændrer sig og skal være faktuelt korrekt.
+
+Fine-tuning er bedst, når form og output skal være fuldstændig ens hver gang.
