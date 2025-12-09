@@ -1,9 +1,7 @@
 
 # **Uddybning til Dagbog Etape 2 (LLM’er & Transformers)**
 
-_(Dette er den version du kan linke til fra din dagbog.)_
 
----
 
 ## 🧠 **Hvad er en LLM egentlig?**
 
@@ -179,23 +177,6 @@ Eksempel:
 
 → Derfor skal du vælge model efter agentens opgave.
 
----
-
-## 🏥 Relevans for dit sundhedsprojekt
-
-Du nævner i blog 2, at dine chatagenter skal forstå sundhedsdata.
-
-Det stiller krav:
-
-### ✔️ Modellen skal forstå fagtermer
-
-Som “akut svimmelhed”, “beta-histidin”, “blodtryk”, “migraine aura”, osv.
-
-### ✔️ Modellen skal være god til kontekstforståelse
-
-F.eks. når brugerens sætning indeholder symptomer, årsager og kontekst.
-
-### ✔️ Modellen må ikke “hallucinere” for meget
 
 Derfor er _modelforståelse_ og transformer-kendskab vigtigt.
 
