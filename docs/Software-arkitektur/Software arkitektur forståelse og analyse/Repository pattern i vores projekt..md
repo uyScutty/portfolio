@@ -1,6 +1,5 @@
 # Repository Pattern, Interfaces og Infrastructure som Plugin-model
 
-Dette indlæg forklarer tre tæt forbundne dele af dit projekts arkitektur:
 
 - **Repository Pattern (DDD-versionen)**
 - **Interface-abstraktion (Application → Infrastructure)**
