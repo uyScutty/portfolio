@@ -1,300 +1,76 @@
-### ⭐ 5) Infrastruktur er udskiftelig
 
-- database
-    
-- email
-    
-- AI
-    
-- busser
-    
-- API'er
-    
+*** Deployment og services.
 
-Kan ændres uden at påvirke Domain eller Application.
+1. .NET-delen er én samlet deploybar enhed (modulær monolit)
 
-### ⭐ 6) Mulighed for fremtidig opsplitning til microservices
+Vi deployer hele .NET-applikationen som én container, fordi:
 
-Modulær monolith + Clean Architecture = naturlig vej til microservices senere.
+Domænet hænger tæt sammen (blog, reviews, membership, profiler).
 
-### ⭐ 7) AI-delen er teknisk isoleret
+Clean Architecture sikrer rene afhængigheder.
 
-Så AI aldrig kan påvirke forretningsregler eller database direkte.
+Vertical Slices gør features isolerede uden at splitte systemet fysisk.
 
----
+Én deployment holder kompleksiteten nede.
 
-# ⭐ **Samlet konklusion – den korte, stærke sætning**
+→ Det giver en robust og enkel kerneapplikation, der er let at vedligeholde og teste.
 
-> Vi startede med en simpel monolith og layered architecture, men efterhånden som projektets domæne voksede og fik dybere forretningslogik, domain events, AI-moduler og flere bounded contexts, blev layered for begrænsende.
-> 
-> Derfor skiftede vi til en modulær monolith med Clean Architecture og Vertical Slice Pattern, fordi det giver rene afhængigheder, klar domain-adskillelse, bedre testbarhed, isoleret AI-integration og langt bedre skalerbarhed og vedligehold på lang sigt.
+2. Python AI-delen køres som en separat service
 
+AI-logik lever i sin egen container og sin egen tekniske stak, fordi:
 
-Udgangspunktet – vi startede simpelt
+Python har langt bedre bibliotekstøtte til embeddings, LLM'er og vektor-databaser.
 
-Monlith med layered architecture var første indskydelse.
+AI må ikke påvirke eller ændre domænelogik i .NET.
 
-I begyndelsen havde projektet bare:
+Den kan skaleres, opdateres eller udskiftes uafhængigt af resten af systemet.
 
-- brugere
-- simple blogposts
-- et lille dashboard
+Den fungerer som en ren ekstern integration: .NET → API → AI-service.
 
-Man kunne i princippet have lavet alt i _ét stort projekt_.  
-Men meget hurtigt havde du flere krav:
+→ AI holdes teknisk isoleret, men integreres kontrolleret.
 
-- anmeldelser (reviews)
-- medlemskaber
-- AI-chat
-- profiler
-- paywalled health-tips
+3. Fælles database (Postgres) i egen container
 
-→ Systemet voksede i funktionalitet.
+Databasen køres separat, fordi:
 
-Dette gjorde at vi gik fra monolith med layered N-tier arkitektur gik til clean architecture lagdeling.
-# Vi valgte Clean Architecture for at holde kerne-logikken ren
+Det giver tydelig isolation mellem app og data.
 
-Vi ønskede:
+Det gør det muligt at migrere, tage backups og opgradere uden at påvirke koden direkte.
 
-- klare grænser mellem lag
-- minimal coupling
-- testbarhed
-- adskillelse mellem _domæne_ og _infrastruktur_
+Postgres passer perfekt til Clean Architecture, hvor domain og data er adskilt.
 
-Derfor endte vi med:
+→ Det giver stabilitet og fleksibilitet i drift.
 
-- **Domain** (entities, regler, events)
-    
-- **Application** (use cases, interfaces)
-    
-- **Infrastructure** (DB, repos, email, gateways)
-    
-- **Web** (UI, vertical slices)
-    
+4. Infrastruktur er altid udskiftelig
 
-Clean Architecture var naturligt her, fordi det:
+Alle tekniske afhængigheder (email, repositories, AI, API’er, logging) ligger i Infrastructure-laget, hvilket betyder:
 
- holder domænet rent  
- sikrer klare grænser  
- gør det let at vokse senere  
- er moderne og forstået af virksomheder
+Man kan skifte database
 
----
+Skifte email-udbyder
 
-## 3️⃣ Behavior voksede – Vertical Slice Architecture var nødvendig
+Udskifte AI-service
 
-Blazor-delen var begyndt at få:
+Tilføje nye API-gateways
 
-- Create/Edit/Delete
-    
-- moderationsflows
-    
-- paywall-checks
-    
-- sub-features (video review, image review, text review)
-    
-- chat integration
-    
+…uden ændringer i Domain eller Application.
 
-Det blev for tungt at lægge alt i standard MVC- eller mappe-opdeling.  
-Derfor valgte vi **Vertical Slice Architecture** for Web-laget:
+→ Det er netop formålet med Clean Architecture: teknologien må aldrig eje forretningen.
 
-- `/Posts/Create`
-    
-- `/Reviews/Owner/CreateImage`
-    
-- `/Membership/Activate`
-    
-- osv.
-    
+5. Arkitekturen gør fremtidig opsplitning muligt
 
-Hver "feature" fik sin egen lille mini-mappe med:
+Selvom vi deployer som én modulær monolit i dag, er systemet bygget sådan, at:
 
-- sin egen component
-    
-- sin egen handler
-    
-- sin egen route
-    
-- sin egen validation
-    
+Hver feature er isoleret (Vertical Slice)
 
-→ Dette er modulær monolit i praksis.
+Domænet er rent og klart afgrænset
 
----
+Infrastruktur er pluggable
 
-## 4️⃣ Skulle det være microservices? → Nej, og det blev et bevidst valg
+Python-AI’en er allerede en ekstern service
 
-Vi diskuterede microservices flere gange:
+→ Hvis systemet vokser, kan man bryde enkelte moduler ud som microservices senere, uden at lave alt om.
 
-**FOR microservices:**
+Kort konklusion – den stærke sætning
 
-- isoleret skalering
-    
-- teams kan arbejde uafhængigt
-    
-- god til meget store systemer
-    
-
-**IMOD microservices:**
-
-- du skal have _orchestration_
-    
-- distributed tracing
-    
-- logging på tværs
-    
-- event-bus
-    
-- for meget kompleksitet til dit behov
-    
-
-Dit projekt havde **ét team (dig selv)** og ét domæne.
-
-→ Microservices ville være overkill og gøre projektet langsommere og mere komplekst.
-
----
-
-## 5️⃣ AI-delen passede ikke i .NET
-
-Da du begyndte at arbejde med AI-chat, embeddings og vektor-databaser, opstod spørgsmålet:
-
-**Skal AI-delen bygges i samme .NET-projekt?**
-
-➡️ Svaret blev NEJ, fordi:
-
-- Python har _langt bedre bibliotek-støtte_ (Chroma, huggingface, LLM-agenter, etc.)
-    
-- Det kører bedre isoleret
-    
-- Det kan skaleres separat
-    
-- Det kan køre lokalt eller i Docker uden at påvirke appen
-    
-
-Derfor blev AI-delen sin egen **eksterne service**.
-
-→ Dette er ikke microservices, men **external service integration**.
-
----
-
-## 6️⃣ Derfor endte vi med en **modulær monolit**
-
-Summen af alle beslutninger:
-
-|Punkt|Consequence|
-|---|---|
-|Du vil gerne holde intern kompleksitet nede|Monolit i kernen|
-|Du vil gerne holde features isoleret|Vertical Slices|
-|Du vil følge Clean Architecture som skole + industristandard|Domain/Application/Infrastructure|
-|Du vil have AI i Python|Ekstern service|
-|Du vil have noget, der kan dockeriseres|Moduler + services i compose|
-|Du vil skalere AI uden at skalere .NET|Python separat|
-
-Den bedste kombination blev:
-
-### 🟩 **Modulær monolit (Clean Architecture + Vertical Slices)**
-
-### 🟦 **Ekstern AI-service i Python**
-
-### 🟧 **Postgres database som fælles persistence-lag**
-
-Dette er moderne arkitektur.  
-Det er præcis det, mange startups bruger i dag, inkl. dem der senere skalerer til microservices.
-
----
-# Hvorfor det er en modulær monolit
-
-### ✔ 1. _Alt domænet er samlet i ét system_
-
-Du har:
-
-- **Domain**
-    
-- **Application**
-    
-- **Infrastructure**
-    
-- **Web (Blazor Server)**
-    
-
-→ Alt er i én codebase og én samlet deploybar enhed.
-
-### ✔ 2. _Men det er opdelt i moduler_
-
-I Web-laget har du Vertical Slice feature-mapper:
-
-`/Posts /Reviews /Profiles /Membership /Chat`
-
-Hver “feature” fungerer som et lille modul med sine egne handlers, DTO'er, components, repo-calls osv.
-
-Det er definitionen på modulær monolit.
-
-### ✔ 3. _Ingen services er selvstændigt deployet_
-
-Du deployer systemet som _ét system_, ikke som 10 mikroservices.
-
----
-
-# Hvorfor det **ikke** er en mikroservice-arkitektur
-
-- Ingen selvstændige bounded context services.
-    
-- Ingen event-bus mellem services.
-    
-- Ingen independent deployment.
-    
-- Database deles i ét EF Core AppDbContext.
-    
-
-Du har dog en _lille_ service:
-
-### ✔ Python AI-agenten → **en ekstern service**, ikke en microservice-arkitektur
-
-Den kører som:
-
-- et selvstændigt API / container
-    
-- men uden eget bounded domain  
-    → mere som et **external integration service**, ikke en microservice.
-    
-
----
-
-# Hvorfor det **heller ikke** er en klassisk monolith
-
-En klassisk monolith = ét projekt, typisk lagdelt, uden modulopdeling.
-
-Din arkitektur:
-
-- Clean Architecture (Domain, Application, Infrastructure)
-    
-- Vertical Slices i Web
-    
-- AI-gateway ud i Python-container  
-    → det er _modulært opbygget_, ikke ét stort sammenklumpet projekt.
-    
-
----
-
-# Hvordan projektet bliver deployet
-
-Den deployment-model vi snakkede mest om:
-
-### **.NET (hele Christians Side) → som én container**
-
-- Domain + Application + Infrastructure + Web (Blazor Server)
-    
-- EF Core database (Postgres i egen container)
-    
-
-### **Python AI-service → egen container**
-
-- Sammen med egen vektorstore (Chroma eller Postgres embeddings)
-    
-
-### → Docker Compose orkestrerer dem:
-
-`app (Blazor Server) db (Postgres) ai-service (Python) ai-vector-db (Postgres/Chroma)`
-
-Det er klassisk **modulær monolit + eksterne services**.
+Vi deployer .NET-applikationen som én modulær monolit for at holde domænet samlet, simpelt og testbart, mens AI-delen kører som en isoleret Python-service for fleksibilitet og teknisk specialisering. Clean Architecture gør infrastrukturen udskiftelig og forbereder systemet naturligt til microservices, hvis behovet opstår
