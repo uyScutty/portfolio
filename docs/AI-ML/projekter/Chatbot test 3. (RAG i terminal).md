@@ -1,9 +1,9 @@
 Målet:  
-➡️ Vi tager **de dokument-matches** du finder via FAISS  
-➡️ Vi sender dem ind som **kontekst** til **Llama 3** (via Ollama)  
-➡️ Modellen genererer et svar baseret på _din egen videnbase_
+ jeg tager **de dokument-matches** du finder via FAISS  
+ jeg sender dem ind som **kontekst** til **Llama 3** (via Ollama)  
+ Modellen genererer et svar baseret på egen videnbase
 
-Dette er første gang du kobler:
+jeg kobler:
 
 - embeddings
     
@@ -15,34 +15,30 @@ Dette er første gang du kobler:
     
 - og returnerer et AI-svar
 
-# **Hvad vi bygger nu (super enkelt som trin 1):**
+# **Hvad vi bygger nu
 
-1️⃣ Du skriver et spørgsmål i terminalen  
-2️⃣ Python embedder dit spørgsmål  
-3️⃣ Python spørger FAISS → finder top-matches  
-4️⃣ Vi bygger en _RAG-prompt_:
+1️ Du skriver et spørgsmål i terminalen  
+2️ Python embedder dit spørgsmål  
+3️ Python spørger FAISS → finder top-matches  
+4️ Vi bygger en _RAG-prompt_:
 
 > “Her er noget relevant kontekst: … Brug det til at svare på spørgsmålet …”  
-> 5️⃣ Python kalder **Llama 3** via Ollama  
-> 6️⃣ Terminalen viser et _rigtigt AI-svar baseret på dine data_
+> 5️ Python kalder **Llama 3** via Ollama  
+> 6️ Terminalen viser et _rigtigt AI-svar baseret på dine data_
 
 
 Til dette projekt har jeg oprettet et nyt script.
 ![[Pasted image 20251124235219.png]]
 # Hvad sker der her?
 
-**Kort forklaring:**
-
-- Du loader dit gemte FAISS-index
+- jeg loader dit gemte FAISS-index
     
-- Du loader metadata (dine dokumenter)
+- jeg loader metadata (dine dokumenter)
     
-- Du loader embedding-modellen
+- jeg loader embedding-modellen
     
-- Du opretter en Ollama-client (for at tale med Llama 3)
+- jeg opretter en Ollama-client (for at tale med Llama 3)
     
-
-Vi sørger bare for grundstrukturen — ingen query eller LLM endnu
 
 ![[Pasted image 20251124235316.png]]# **Hvad sker der i Trin 2?** (kort forklaret)
 
@@ -123,11 +119,11 @@ Jeg testede også modellen med et spørgsmål der ikke helt giver mening i forho
 Denne model fungerer via RAG stadigvæk med egen fantasi
 
 
-# **Teknisk resume af dit RAG-system (Projekt 4)**
+# **Teknisk resume af RAG-system 
 
 ## **1) Dokumenterne omdannes til embeddings**
 
-- Du har nogle små tekststykker (dine dokumenter).
+- jeg har nogle små tekststykker (dine dokumenter).
     
 - De sendes gennem en embedding-model (MiniLM).
     
@@ -148,7 +144,7 @@ Når du stiller et spørgsmål:
 
 Det er dine "fundne relevante dokumenter".
 
----
+
 
 ## **3) Disse dokumenter sendes som kontekst til Llama3**
 
@@ -158,27 +154,26 @@ Dine dokumenter kommer ind før spørgsmålet:
 
 Det betyder at modellen **forstår, hvad dit projekt handler om**, før den svarer.
 
----
 
 ## **4) Modellen bruger både:**
 
-- **Dine dokumenter (RAG-kontekst)**
+- **Mine dokumenter (RAG-kontekst)**
     
 - **Sin egen træningsviden**
     
 
 RAG påvirker svaret kraftigt, men modellen supplerer med sin almindelige viden.
 
-Derfor får du:
+Derfor får jeg:
 
 - Relevante pointer fra dine dokumenter
     
 - Ekstra detaljer fra modellens generelle viden
     
 
----
 
-## **5) Output er et AI-svar, der er _forankret_ i dine dokumenter – men ikke begrænset til dem**
+
+## **5) Output er et AI-svar, der er forankret i mine dokumenter, men ikke begrænset til dem
 
 Derfor gav dit spørgsmål “kan maskinlæring hjælpe på sundhed?” et langt, rigtigt sundhedssvar:
 
