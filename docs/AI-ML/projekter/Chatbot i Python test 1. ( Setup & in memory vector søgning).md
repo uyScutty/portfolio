@@ -102,7 +102,6 @@ Det betyder, at hver tekst nu lever som et sæt tal, der repræsenterer betydnin
 
 Dette betyder simpelthen: 4 tekster × 384 tal hver.
 
----
 
 ## **2. Vi lagde dem ind i et FAISS-index**
 
@@ -114,11 +113,10 @@ Vi byggede et L2-baseret index:
 
 Dette index fungerer som et “kartotek” over teksternes betydninger.
 
----
 
 ## **3. Vi søgte efter et spørgsmål**
 
-Du gav prompten:
+Vi gav prompten:
 
 > “How do computers learn?”
 
@@ -130,7 +128,7 @@ FAISS fandt de to bedste matches:
 
 En **lavere distance betyder større semantisk lighed**, derfor blev maskinlærings-sætningen nummer 1.
 
----
+
 
 ## **4. Hvad vi har lært i dette projekt**
 
@@ -147,26 +145,3 @@ Dette mini-projekt demonstrerer:
 - at alt kan køre lokalt uden OpenAI, API-nøgler eller cloud
     
 
----
-
-## **5. Hvorfor er dette vigtigt?**
-
-FAISS-projektet udgør fundamentet for dit kommende:
-
-- lokale AI-system
-    
-- dokument-assistent
-    
-- søgefunktion til sundhedsplatformen
-    
-- agent-baserede features
-    
-- integration med Llama3 på Ollama
-    
-- (senere) RAG med persistente vektor-databaser
-    
-
-Det er her, du går fra “embedding-demo” → “rigtig AI-arkitektur”.
-
-
-I en kommende docker implementering af cahtbotten, så vil der være et miljø, der bliver sat op med samme versioner og uden konflikter "regner jeg med" så vi der undgår de problemer der var under dette projekt med chroma
