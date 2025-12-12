@@ -2,7 +2,7 @@
 # Persistent Vector Store
 
 Formål:  
-At gøre dine embeddings permanente, så de ikke forsvinder når programmet stopper — i modsætning til Projekt 2, som kørte “in-memory”.
+At gøre embeddings permanente, så de ikke forsvinder når programmet stopper — i modsætning til Projekt 2, som kørte “in-memory”.
 
 her vil vi:
 - FAISS index i RAM
@@ -30,40 +30,34 @@ I svaret får vi angivet en afstand, der viser hvor relevant tekst svaret er vur
 
 # En rigtig Vector Database Workflow**
 
-Du har i dette projekt vist alle nøgleelementer i en fuld “retrieval system”-pipeline:
-
-### **✔ Embedding af dokumenter**
+### ** Embedding af dokumenter**
 
 → Ved hjælp af SentenceTransformer (MiniLM).
 
-### **✔ Gemning af embeddings permanent på disk**
+### ** Gemning af embeddings permanent på disk**
 
 → `faiss_index.idx`  
 → `metadata.json`
 
-### **✔ Query-embedding (brugerens spørgsmål)**
+### ** Query-embedding (brugerens spørgsmål)**
 
 → Samme embedding-model → vektor i samme rum.
 
-### **✔ Semantisk similarity search med FAISS**
+### ** Semantisk similarity search med FAISS**
 
 → Finder meningsmæssigt relaterede dokumenter.
 
-### **✔ Returnering af top-matches med distance**
+### ** Returnering af top-matches med distance**
 
 → Afstand fortæller relevans.
 
 Dette er **hele fundamentet for RAG (Retrieval-Augmented Generation)**.
 
----
+Vi har bygget:
 
-# 🧩 Hvad du har vist i dette mini-projekt
+##  **En fuld funktionel persistent vector store med FAISS, inkl. opslag og similarity search.**
 
-Du kan nu dokumentere, at du har bygget:
-
-## 🎓 **En fuld funktionel persistent vector store med FAISS, inkl. opslag og similarity search.**
-
-Og ikke kun in-memory — du har:
+Og ikke kun in-memory — vi har:
 
 - persistence
     
