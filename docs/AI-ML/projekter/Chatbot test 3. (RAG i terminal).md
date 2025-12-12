@@ -1,6 +1,6 @@
 Målet:  
- jeg tager **de dokument-matches** du finder via FAISS  
- jeg sender dem ind som **kontekst** til **Llama 3** (via Ollama)  
+ At tage de dokument-matches vi finder via FAISS  
+ jeg sender dem ind som kontekst til Llama 3 (via Ollama)  
  Modellen genererer et svar baseret på egen videnbase
 
 jeg kobler:
@@ -17,47 +17,40 @@ jeg kobler:
 
 # **Hvad vi bygger nu
 
-1️ Du skriver et spørgsmål i terminalen  
-2️ Python embedder dit spørgsmål  
+1️ Jeg skriver et spørgsmål i terminalen  
+2️ Python embedder spørgsmålet  
 3️ Python spørger FAISS → finder top-matches  
-4️ Vi bygger en _RAG-prompt_:
-
-> “Her er noget relevant kontekst: … Brug det til at svare på spørgsmålet …”  
-> 5️ Python kalder **Llama 3** via Ollama  
-> 6️ Terminalen viser et _rigtigt AI-svar baseret på dine data_
+4️ Vi bygger en _RAG-prompt_: 
+5️ Python kalder **Llama 3** via Ollama  
+6️ Terminalen viser et _rigtigt AI-svar baseret på dine data_
 
 
 Til dette projekt har jeg oprettet et nyt script.
 ![[Pasted image 20251124235219.png]]
 # Hvad sker der her?
 
-- jeg loader dit gemte FAISS-index
+- jeg loader det gemte FAISS-index
     
-- jeg loader metadata (dine dokumenter)
+- jeg loader metadata (dokumenter)
     
 - jeg loader embedding-modellen
     
 - jeg opretter en Ollama-client (for at tale med Llama 3)
     
 
-![[Pasted image 20251124235316.png]]# **Hvad sker der i Trin 2?** (kort forklaret)
+![[Pasted image 20251124235316.png]]# 
 
 |Trin|Hvad sker der?|
 |---|---|
-|**5**|Du skriver et spørgsmål i terminalen|
-|**6**|Query embeddes til en vektor|
-|**7**|FAISS laver similarity search|
-|**8**|Systemet slår tekster op i metadata og viser dem|
-
-Du får nu det samme output som i Projekt 3 — men denne gang skal vi **bruge det videre til RAG**.
+Jeg skriver et spørgsmål i terminalen|
+Query embeddes til en vektor|
+FAISS laver similarity search|
+Systemet slår tekster op i metadata og viser dem
 
 
 
 ![[Pasted image 20251124235427.png]]
 
-Perfekt — så laver vi **Trin 3: Selve RAG-prompten**.
-
-Dette er den del der forvandler dit retrieval-system til en **rigtig AI-assistent**, fordi vi nu kombinerer:
 
 ### Vi bygger en robust RAG-prompt
 
@@ -72,8 +65,6 @@ Prompten fortæller modellen:
 - _her er spørgsmålet_
     
 
-### ✔ Vi gør klar til at sende prompten til Llama 3
-
 
 ![[Pasted image 20251124235545.png]]# **Hvad sker der her? (kort og teknisk)**
 
@@ -83,31 +74,28 @@ Dette kalder Ollama-serveren på:
 
 `http://localhost:11434`
 
-Og sender din RAG-prompt ind i modellen:
+Og sender RAG-prompt ind i modellen:
 
-- Prompten indeholder dine _retrieved documents_
+- Prompten indeholder de _retrieved documents_
     
-- og dit _spørgsmål_
+- og spørgsmålet
     
 
-### ✔ **Modellen genererer et svar**
+### Modellen genererer et svar
 
 Llama 3 bruger:
 
-- din kontekst (dine dokumenter)
+kontekst (dokumenter)
     
-- og selve spørgsmålet
-    
+og selve spørgsmålet til at lave et nyt, kontekstbaseret svar.
 
-til at lave et **nyt, kontekstbaseret svar**.
-
-### ✔ **Vi udtrækker svaret**
+###  Vi udtrækker svaret
 
 `ai_answer = response['response']`
 
-### ✔ **Og printer det**
+###  Og printer det
 
-Terminalen viser nu dit første _rigtige RAG-svar_.
+Og vi får et RAG-svar
 
 ![[Pasted image 20251125001729.png]]
 Her ses tydeligt at der tages udgangspunkt i vores dokumenter fra [[Chatbot i python test 2. (Persitens)]]
@@ -119,9 +107,8 @@ Jeg testede også modellen med et spørgsmål der ikke helt giver mening i forho
 Denne model fungerer via RAG stadigvæk med egen fantasi
 
 
-# **Teknisk resume af RAG-system 
 
-## **1) Dokumenterne omdannes til embeddings**
+## 1) Dokumenterne omdannes til embeddings
 
 - jeg har nogle små tekststykker (dine dokumenter).
     
@@ -130,13 +117,11 @@ Denne model fungerer via RAG stadigvæk med egen fantasi
 - Resultatet er vektorer (fx længde 384), som placeres i en FAISS-database.
     
 
-Dette gør det muligt at **sammenligne betydning**, ikke ord.
+Dette gør det muligt at sammenligne betydning, ikke ord.
 
----
+##2) FAISS bruges til at finde de mest relevante dokumenter
 
-## **2) FAISS bruges til at finde de mest relevante dokumenter**
-
-Når du stiller et spørgsmål:
+Når man stiller et spørgsmål:
 
 → Spørgsmålet embeddes til en vektor  
 → FAISS laver vektor-sammenligning (L2 distance)  
@@ -152,21 +137,21 @@ Dine dokumenter kommer ind før spørgsmålet:
 
 > “Her er nogle dokumenter. Brug dem til at svare så godt som muligt.”
 
-Det betyder at modellen **forstår, hvad dit projekt handler om**, før den svarer.
+Det betyder at modellen forstår, hvad dit projekt handler om, før den svarer.
 
 
-## **4) Modellen bruger både:**
+## 4) Modellen bruger både:
 
-- **Mine dokumenter (RAG-kontekst)**
+- Mine dokumenter (RAG-kontekst)
     
-- **Sin egen træningsviden**
+- Sin egen træningsviden**
     
 
 RAG påvirker svaret kraftigt, men modellen supplerer med sin almindelige viden.
 
 Derfor får jeg:
 
-- Relevante pointer fra dine dokumenter
+- Relevante pointer fra dokumenter
     
 - Ekstra detaljer fra modellens generelle viden
     
@@ -175,8 +160,8 @@ Derfor får jeg:
 
 ## **5) Output er et AI-svar, der er forankret i mine dokumenter, men ikke begrænset til dem
 
-Derfor gav dit spørgsmål “kan maskinlæring hjælpe på sundhed?” et langt, rigtigt sundhedssvar:
+Derfor gav spørgsmåler “kan maskinlæring hjælpe på sundhed?” et langt, rigtigt sundhedssvar:
 
-- Dokumenterne gjorde svaret **relevant**
+- Dokumenterne gjorde svaret relevant
     
 - Modellen fyldte selv på med detaljer
