@@ -59,13 +59,13 @@ Flowet:
     - distance-score
 
 Dette er en ren “retriever” – den genererer ikke endnu svar med AI. 
-bagefter laver jeg en ny fil, der skal være chat-endpoint, hvor spørgsmål kan stilles til vores model.
-rag_engine.py.
 
 ![[Pasted image 20251125140812.png]]
 
 
 
+bagefter laver jeg en ny fil, der skal være chat-endpoint, hvor spørgsmål kan stilles til vores model.
+rag_engine.py.
 derefter udvider jeg main.py med et chat endpoint og importer RAG søgning til at gennemgå dokumenterne fra [[Chatbot i python test 2. (Persitens)]] 
 modellen laver similarity search og retrieval via FAISS og returnerer relevante dokumenter den finder via embeddings vi tidligere har lavet.
 ![[Pasted image 20251125141312.png]]
@@ -76,6 +76,7 @@ Den kan nu modtage en query og svarer i forhold til dokumenterne
 Derefter installerer vi Ollama-klienten i miljøet, der kan kalde Llama-3 modellen.
 Så der kan genereres rigtige ai svar baseret på vores dokumenter.
 Det bliver oprettet i en ny fil kaldet llm_engine.py
+
 ![[Pasted image 20251125144748.png]]
 Denne del af projektet opretter en ny fil, `llm_engine.py`, som står for **selve AI-genereringen**.  
 Her forbinder vi Python-koden med den lokale **Llama-3-model** via Ollama-klienten.
