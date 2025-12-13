@@ -147,7 +147,6 @@ Det viser, at systemet laver en fuld RAG-proces:
 
 # **Hvad projekt 4 lærte mig**
 
-_(teknisk, præcist og baseret på det du faktisk lavede)_
 
 I dette projekt arbejdede jeg videre på de tidlige tests, men nu med fokus på at bygge det første rigtige **chat-endpoint**, der kombinerer:
 
