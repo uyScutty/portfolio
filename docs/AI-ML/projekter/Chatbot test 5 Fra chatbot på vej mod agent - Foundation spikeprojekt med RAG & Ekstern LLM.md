@@ -53,9 +53,9 @@ Det bliver herefter gemt lokalt.
 
 Dette gør, at:
 
-✔ Serveren kan genstarte uden at miste data  
-✔ Du kan loade indexet direkte i FastAPI  
-✔ Du behøver ikke lave embeddings hver gang
+Serveren kan genstarte uden at miste data  
+Man kan loade indexet direkte i FastAPI  
+Man behøver ikke lave embeddings hver gang
 
 
 Ved kørsel af filen build_vector_store.py så bliver datasættet lavet til 28 chunks.
@@ -109,7 +109,7 @@ Vi tager det stille og roligt
 
 # Hvad denne version nu gør
 
-⚡ **Brugeren spørger → http://localhost:8000/ask?query=noget**
+ **Brugeren spørger → http://localhost:8000/ask?query=noget**
 
 API’en gør:
 
