@@ -1,4 +1,4 @@
-# **Beskrivelse af agent 
+# **Implementation af Agent prototype 
 
 
 Målet med projektet er at udvikle en intelligent guide-agent til websitet _The Way of Coherence_.  
