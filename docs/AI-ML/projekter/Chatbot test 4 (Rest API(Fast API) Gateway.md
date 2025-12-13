@@ -44,9 +44,9 @@ Eksempel:
 
 
 
-### **2. RAG-motoren (rag_engine.py) – _kun retrieval_ på dette tidspunkt**
+### 2. RAG-motoren (rag_engine.py) – kun retrieval_ på dette tidspunkt
 
-I dette projekt returnerer RAG-motoren **kun tekstchunks**, ikke AI-svar.
+Pt returnerer RAG-motoren kun tekstchunks, ikke AI-svar.
 
 Flowet:
 
@@ -58,8 +58,7 @@ Flowet:
     - titel
     - distance-score
 
-Dette var en ren “retriever” – den genererer ikke endnu svar med AI.
-
+Dette er en ren “retriever” – den genererer ikke endnu svar med AI. 
 bagefter laver jeg en ny fil, der skal være chat-endpoint, hvor spørgsmål kan stilles til vores model.
 rag_engine.py.
 
