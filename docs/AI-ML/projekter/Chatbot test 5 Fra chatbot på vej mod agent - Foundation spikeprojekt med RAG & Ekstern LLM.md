@@ -1,5 +1,6 @@
 
-Her bygges videre på det der er lært i de tidligere projekter og henimod den endelige bot til hjemmesiden.
+## Fra chatbot til Agent
+
 
 
 Jeg vil arbejde videre med nogen af de skabeloner jeg lavede i tidligere projekter, især i [[Chatbot test 4 (Rest API(Fast API) Gateway.]]  og bruge dette som kontekst og inspiration og følge min læring fra disse projekter.
